@@ -12,9 +12,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-
-
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope=BibliothequeBean.class)
+
 public class BibliothequeBean {
 
 

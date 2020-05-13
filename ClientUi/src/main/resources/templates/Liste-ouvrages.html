@@ -59,11 +59,11 @@
                 </div>
       
                 <div th:unless="${ouvrage.disponibilite}">
-                  <button class="btn btn-large btn-success" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
-                Disponible
+                  <button class="btn btn-large btn-danger" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
+                Indisponible
                 </button>
                 <div class="collapse" id="collapseExample1">
-                <div class="card card-body" th:text="|Cet ouvrage est disponible en ${nombreExemplaire} exemplaire(s)|"></div>
+                <div class="card card-body" th:text="|Cet ouvrage est indisponible|"></div>
                 </div>
                 </div>
       

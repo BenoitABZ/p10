@@ -28,6 +28,11 @@ public class OuvrageClientController {
 		
 		String keyString = params.getFirst("libelleCase");
 		
+		if (keyString==null|| keyString=="") {
+			
+			keyString ="null";
+		}
+		
 		List<OuvrageAuth> ouvrages = ouvrageProxy.getSelectOuvrages(keyString);
 		
 		model.addAttribute("ouvrages", ouvrages);

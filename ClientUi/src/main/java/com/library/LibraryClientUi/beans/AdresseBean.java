@@ -1,20 +1,69 @@
 package com.library.LibraryClientUi.beans;
 
+import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
-public class AdresseBean {
+
+public class AdresseBean implements Serializable {
 	
-	public String numeroVoie;
+
+	private static final long serialVersionUID = 1L;
+
 	
-	public String libelleVoie;
+	private String numeroVoie;
+	
+	
+	private String libelleVoie;
 
-	public String nomVoie;
+	
+	private String nomVoie;
 
-	public String codePostal;
+	
+	private String codePostal;
 
-	public String ville;
+
+	private String ville;
+
+	public String getNumeroVoie() {
+		return numeroVoie;
+	}
+
+	public void setNumeroVoie(String numeroVoie) {
+		this.numeroVoie = numeroVoie;
+	}
+
+	public String getLibelleVoie() {
+		return libelleVoie;
+	}
+
+	public void setLibelleVoie(String libelleVoie) {
+		this.libelleVoie = libelleVoie;
+	}
+
+	public String getNomVoie() {
+		return nomVoie;
+	}
+
+	public void setNomVoie(String nomVoie) {
+		this.nomVoie = nomVoie;
+	}
+
+	public String getCodePostal() {
+		return codePostal;
+	}
+
+	public void setCodePostal(String codePostal) {
+		this.codePostal = codePostal;
+	}
+
+	public String getVille() {
+		return ville;
+	}
+
+	public void setVille(String ville) {
+		this.ville = ville;
+	}
 
 }

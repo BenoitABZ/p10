@@ -1,5 +1,7 @@
 package com.library.LibraryClientUi.beans;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -9,10 +11,12 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 
 @JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope=ExemplaireBean.class)
-public class ExemplaireBean {
-	
 
-	public int id; 
+public class ExemplaireBean implements Serializable {
+	
+	private static final long serialVersionUID = 1L; 
+
+	public Integer id; 
 
 	public String anneePublication;
     
