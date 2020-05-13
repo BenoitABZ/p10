@@ -3,14 +3,6 @@ package com.library.LibraryBatch.bean;
 import java.io.Serializable;
 
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -18,36 +10,34 @@ import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-@Entity
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope=Exemplaire.class)
 
-public class Exemplaire implements Serializable {
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope=ExemplaireBean.class)
+
+public class ExemplaireBean implements Serializable {
 	
 	private static final long serialVersionUID = 1L; 
 	
-	@Id
-    @GeneratedValue
-    @Column(name="id_exemplaire")
+
     private Integer id;
  
 
-    @Column(name="annee_publication")
+
 	private String anneePublication;
     
-    @Column(name="editeur")
+
     private String editeur;
     
     
-	@ManyToOne(fetch = FetchType.EAGER)
-	private Bibliotheque bibliotheque;
+	
+	private BibliothequeBean bibliotheque;
 	
     
-	@OneToOne(mappedBy = "exemplaire", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
-	private Emprunt emprunt;
+	
+	private EmpruntBean emprunt;
 	
     
-	@ManyToOne(fetch = FetchType.EAGER)
-	private Ouvrage ouvrage;
+
+	private OuvrageBean ouvrage;
 
 	public Integer getId() {
 		return id;
@@ -73,27 +63,27 @@ public class Exemplaire implements Serializable {
 		this.editeur = editeur;
 	}
 
-	public Bibliotheque getBibliotheque() {
+	public BibliothequeBean getBibliotheque() {
 		return bibliotheque;
 	}
 
-	public void setBibliotheque(Bibliotheque bibliotheque) {
+	public void setBibliotheque(BibliothequeBean bibliotheque) {
 		this.bibliotheque = bibliotheque;
 	}
 
-	public Emprunt getEmprunt() {
+	public EmpruntBean getEmprunt() {
 		return emprunt;
 	}
 
-	public void setEmprunt(Emprunt emprunt) {
+	public void setEmprunt(EmpruntBean emprunt) {
 		this.emprunt = emprunt;
 	}
 
-	public Ouvrage getOuvrage() {
+	public OuvrageBean getOuvrage() {
 		return ouvrage;
 	}
 
-	public void setOuvrage(Ouvrage ouvrage) {
+	public void setOuvrage(OuvrageBean ouvrage) {
 		this.ouvrage = ouvrage;
 	}
 	

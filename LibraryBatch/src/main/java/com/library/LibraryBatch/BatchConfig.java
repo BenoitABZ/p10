@@ -27,15 +27,18 @@ public class BatchConfig {
 	 @Autowired
 	 public StepBuilderFactory stepBuilderFactory;
 	 
+	 /* 
 	 @Autowired
 	 public DataSource dataSource;
-	 
+	 */
 	
+	 @Autowired
+	 public EmprunteurProxy emprunteurProxy;
 	 
 	  @Bean
 	  ItemReader<EmprunteurBean> read(){
 	  EmprunteurItemReader eir = new EmprunteurItemReader();
-	  ItemReader<EmprunteurBean> inputR = eir.read(dataSource);
+	  ItemReader<EmprunteurBean> inputR = eir.read(emprunteurProxy);
 		  
 	  return inputR;
 	 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,19 @@ public class EmprunteurControlleur {
 	   
 	   @Autowired
 		PasswordEncoder passwordEncoder;
+	   
+	   @GetMapping(value= "/Emprunteurs/retardataires")
+	   public List<Emprunteur> getEmprunteursRetardataires() {
+		   
+		   List<Emprunteur> emprunteurs = emprunteurDao.findRetardataires();
+		   
+		   Emprunteur emprunteur=emprunteurs.get(0);
+		   
+		   System.out.println(emprunteur.getNom());
+		   
+		   return emprunteurs;
+		    }
+	
 	
 	   @GetMapping(value = "/Emprunteurs")   
 	   public List<Emprunteur> getEmprunteurs() {

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.library.LibraryRestApi.model.Emprunteur;
 
@@ -20,6 +21,12 @@ public interface EmprunteurDao extends JpaRepository <Emprunteur, Integer> {
 	
 	List<Emprunteur> findAll();
 	
+	   @Query("SELECT em "
+			   + "FROM Emprunteur em "
+			   + "JOIN Emprunt e ON em.id=e.emprunteur.id  "
+			   + "WHERE current_date > e.dateRetour")
+			   
+	   List<Emprunteur> findRetardataires();
 	
 
 }

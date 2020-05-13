@@ -1,15 +1,17 @@
 package com.library.LibraryBatch;
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.database.JdbcCursorItemReader;
-
+import org.springframework.batch.item.support.ListItemReader;
 
 import com.library.LibraryBatch.bean.EmprunteurBean;
 
 public class EmprunteurItemReader {
-	
+/*
 	private static final String QUERY_FIND_EMPRUNTEUR =
    "SELECT emprunteur.adresse_mail "
    + "FROM emprunteur "
@@ -27,7 +29,21 @@ public class EmprunteurItemReader {
        
  
         return databaseReader;
-    }
+     }
+     
+     */
+	
+    public ItemReader<EmprunteurBean> read(EmprunteurProxy emprunteurProxy) {
+    	
+     
+    	List<EmprunteurBean> emprunteursList =  emprunteurProxy.getEmprunteursRetardataires();
+       
+    	ListItemReader<EmprunteurBean> emprunteurs = new ListItemReader<EmprunteurBean>(emprunteursList);
+ 
+        return emprunteurs;
+     }
+	
+	
 }
 
 

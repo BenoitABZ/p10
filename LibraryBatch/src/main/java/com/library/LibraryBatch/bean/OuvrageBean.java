@@ -1,143 +1,105 @@
 package com.library.LibraryBatch.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-@Entity
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id", scope=Ouvrage.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = OuvrageBean.class)
 
-public class Ouvrage implements Serializable{
-	
+public class OuvrageBean implements Serializable {
 
-	private static final long serialVersionUID = 1L; 
-	
-	    @Id
-	    @GeneratedValue
-	    @Column(name="id_ouvrage")
-	    private Integer id;
-	    
-	    @Column(name="titre")
-	    private String titre;
+	private static final long serialVersionUID = 1L;
 
-	    @Column(name="auteur")
-	    private String auteur;
+	private Integer id;
 
-	    @Column(name="categorie")
-	    private String categorie;
+	private String titre;
 
-	    @Column(name="resume")
-	    private String resume;
+	private String auteur;
 
-	    @Column(name="annee_parution")
-		private String anneeParution;
-	    
-	    @Column(name="disponibilite")
-	    private Boolean disponibilite;
-	    
-	    @Column(name="image")    
-	    private String image;
-        
-	    
-		@OneToMany(mappedBy="ouvrage",cascade=CascadeType.ALL)
-		private Set<Exemplaire> exemplaires;
-		
+	private String categorie;
 
-	  
+	private String resume;
 
-		public Integer getId() {
-			return id;
-		}
+	private String anneeParution;
 
-		public void setId(Integer id) {
-			this.id = id;
-		}
+	private Boolean disponibilite;
 
-		public String getTitre() {
-			return titre;
-		}
+	private String image;
 
-		public void setTitre(String titre) {
-			this.titre = titre;
-		}
+	private Set<ExemplaireBean> exemplaires;
 
-		public String getAuteur() {
-			return auteur;
-		}
+	public Integer getId() {
+		return id;
+	}
 
-		public void setAuteur(String auteur) {
-			this.auteur = auteur;
-		}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-		public String getCategorie() {
-			return categorie;
-		}
+	public String getTitre() {
+		return titre;
+	}
 
-		public void setCategorie(String categorie) {
-			this.categorie = categorie;
-		}
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
 
-		public String getResume() {
-			return resume;
-		}
+	public String getAuteur() {
+		return auteur;
+	}
 
-		public void setResume(String resume) {
-			this.resume = resume;
-		}
+	public void setAuteur(String auteur) {
+		this.auteur = auteur;
+	}
 
-		public String getAnneeParution() {
-			return anneeParution;
-		}
+	public String getCategorie() {
+		return categorie;
+	}
 
-		public void setAnneeParution(String anneeParution) {
-			this.anneeParution = anneeParution;
-		}
-		    
+	public void setCategorie(String categorie) {
+		this.categorie = categorie;
+	}
 
-		public Boolean getDisponibilite() {
-			return disponibilite;
-		}
+	public String getResume() {
+		return resume;
+	}
 
-		public void setDisponibilite(Boolean disponibilite) {
-			this.disponibilite = disponibilite;
-		}
-		
-		public String getImage() {
-			return image;
-		}
+	public void setResume(String resume) {
+		this.resume = resume;
+	}
 
-		public void setImage(String image) {
-			this.image = image;
-		}
+	public String getAnneeParution() {
+		return anneeParution;
+	}
 
+	public void setAnneeParution(String anneeParution) {
+		this.anneeParution = anneeParution;
+	}
 
-		public Set<Exemplaire> getExemplaires() {
-			return exemplaires;
-		}
+	public Boolean getDisponibilite() {
+		return disponibilite;
+	}
 
-		public void setExemplaires(Set<Exemplaire> exemplaires) {
-			this.exemplaires = exemplaires;
-		}
+	public void setDisponibilite(Boolean disponibilite) {
+		this.disponibilite = disponibilite;
+	}
 
+	public String getImage() {
+		return image;
+	}
 
-		
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public Set<ExemplaireBean> getExemplaires() {
+		return exemplaires;
+	}
+
+	public void setExemplaires(Set<ExemplaireBean> exemplaires) {
+		this.exemplaires = exemplaires;
+	}
 
 }

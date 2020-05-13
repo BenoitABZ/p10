@@ -47,11 +47,47 @@ public class OuvrageController {
 	   @GetMapping(value = "/Search/Ouvrages/{keyString}")
 	   public List<OuvrageAuth> getOuvrage(@PathVariable("keyString") String keyString) {
 		   
+		   if (keyString == "null" || keyString ==null) {
+			   
+			   List<Ouvrage> ouvrages = ouvrageDao.findAll();
+			   
+			   List<OuvrageAuth> ouvragesBuff = new ArrayList<OuvrageAuth>();
+			   
+			   for(Ouvrage ouvrage:ouvrages) {
+				   
+                    OuvrageAuth ouvrageAuth = new OuvrageAuth();
+				   
+				   ouvrageAuth.setId(ouvrage.getId());
+				   ouvrageAuth.setAnneeParution(ouvrage.getAnneeParution());
+				   ouvrageAuth.setTitre(ouvrage.getTitre());
+				   ouvrageAuth.setAuteur(ouvrage.getAuteur());
+				   ouvrageAuth.setResume(ouvrage.getResume());
+				   ouvrageAuth.setCategorie(ouvrage.getCategorie());
+				   ouvrageAuth.setImage(ouvrage.getImage());
+				   ouvrageAuth.setDisponibilite(ouvrage.getDisponibilite());
+				   
+				   int nombreExemplaires = ouvrage.getExemplaires().size();
+				   
+				   ouvrageAuth.setNombreExemplaires(nombreExemplaires);
+				   
+				   ouvragesBuff.add(ouvrageAuth);
+				   
+				   
+				   
+			   }
+			   
+			   return ouvragesBuff;
+			   
+			   
+		   }
+		   
 		   String keyS = format(keyString);
 				   
 		   List<OuvrageAuth> ouvragesBuff = new ArrayList<OuvrageAuth>();
 		   
 		   List<Ouvrage> ouvrages = ouvrageDao.findAll();
+		   
+		   
 		   		   		   
 		   for(Ouvrage ouvrage:ouvrages) {
 			   

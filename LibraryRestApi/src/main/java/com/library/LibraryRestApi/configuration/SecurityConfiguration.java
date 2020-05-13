@@ -71,14 +71,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
     http.httpBasic()
     .and()
-        .authorizeRequests()     
+        .authorizeRequests() 
+        /*
         .antMatchers("/Connexion").permitAll()
         .antMatchers("/Bibliotheques").permitAll()
         .antMatchers("/Search/Emprunts/**").permitAll()
         .antMatchers("/Search/Ouvrages").permitAll()
+        */
         .antMatchers("/h2-console/**").permitAll()
         .antMatchers("/Liste-emprunts").authenticated()  
-        .anyRequest().permitAll()  
+        .anyRequest().authenticated()  
     .and()
         .formLogin()
         .loginProcessingUrl("/login")

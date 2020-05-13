@@ -1,6 +1,6 @@
 package com.library.LibraryBatch.bean;
 
-import javax.persistence.Column;
+
 
 public class OuvrageAuth {  
 	

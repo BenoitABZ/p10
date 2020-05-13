@@ -3,52 +3,36 @@ package com.library.LibraryBatch.bean;
 
 import java.io.Serializable;
 
+
 import java.time.LocalDate;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-@Entity
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope=Emprunt.class)
 
-public class Emprunt implements Serializable{
+@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope=EmpruntBean.class)
+
+public class EmpruntBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L; 
 
-    @Id
-    @GeneratedValue
-    @Column(name="id_emprunt")
-    private Integer id;
+    private int id;
     
-    @Column(name="date_emprunt")
-    private LocalDate dateEmprunt;
+ 
+    private String dateEmprunt;
     
-    @Column(name="date_retour")
-    private LocalDate dateRetour;
+
+    private String dateRetour;
     
-    @Column(name="prolongation")
+    
     private Boolean prolongation;
-    
-    
-    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Exemplaire exemplaire;
-    
-    
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinColumn(name="id_emprunteur")
-	private Emprunteur emprunteur;
+ 
+    private ExemplaireBean exemplaire;
+
+	private EmprunteurBean emprunteur;
 
 	public Integer getId() {
 		return id;
@@ -58,19 +42,19 @@ public class Emprunt implements Serializable{
 		this.id = id;
 	}
 
-	public LocalDate getDateEmprunt() {
+	public String getDateEmprunt() {
 		return dateEmprunt;
 	}
 
-	public void setDateEmprunt(LocalDate dateEmprunt) {
+	public void setDateEmprunt(String dateEmprunt) {
 		this.dateEmprunt = dateEmprunt;
 	}
 
-	public LocalDate getDateRetour() {
+	public String getDateRetour() {
 		return dateRetour;
 	}
 
-	public void setDateRetour(LocalDate dateRetour) {
+	public void setDateRetour(String dateRetour) {
 		this.dateRetour = dateRetour;
 	}
 
@@ -82,19 +66,19 @@ public class Emprunt implements Serializable{
 		this.prolongation = prolongation;
 	}
 
-	public Exemplaire getExemplaire() {
+	public ExemplaireBean getExemplaire() {
 		return exemplaire;
 	}
 
-	public void setExemplaire(Exemplaire exemplaire) {
+	public void setExemplaire(ExemplaireBean exemplaire) {
 		this.exemplaire = exemplaire;
 	}
 
-	public Emprunteur getEmprunteur() {
+	public EmprunteurBean getEmprunteur() {
 		return emprunteur;
 	}
 
-	public void setEmprunteur(Emprunteur emprunteur) {
+	public void setEmprunteur(EmprunteurBean emprunteur) {
 		this.emprunteur = emprunteur;
 	}
 
