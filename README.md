@@ -15,10 +15,8 @@ Prerequesite:
 
 - PostgreSql: On the repository you can find an generation script of the database and a Dump
 
-If you want to set a database with some data: - createdb p7
-                                     
-                                              - psql p7 < dB_dump_p7.sql
-                                               
+If you want to set a database with some data: createdb p7 & psql p7 < Db_dump_p7.sql
+                                                                                   
 If you want to set only database table: copy/paste DB_CREATE_p7 when running postgres with your own role.
 
 - Apache Maven 3.6.2
