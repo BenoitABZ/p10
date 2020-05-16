@@ -31,6 +31,8 @@ Spring boot allow us to create jar files with embedded tomcat server!
 
 To deploy:
 
+Fork and clone this project, open a terminal and open the project directory:
+
 java -jar ClientUi-0.0.1-SNAPSHOT.jar running on port 8081
 
 java -jar LibraryBatch-0.0.1-SNAPSHOT.jar running on port 8080
