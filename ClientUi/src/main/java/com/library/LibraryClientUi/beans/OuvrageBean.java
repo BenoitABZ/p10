@@ -1,23 +1,20 @@
 package com.library.LibraryClientUi.beans;
 
-
-
 import java.io.Serializable;
-import java.util.List;
+
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope=OuvrageBean.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = OuvrageBean.class)
+
 public class OuvrageBean implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	public Integer id;
-   
+
 	public String titre;
 
 	public String auteur;
@@ -29,11 +26,10 @@ public class OuvrageBean implements Serializable {
 	public String anneeParution;
 
 	public Boolean disponibilite;
-    
+
 	public String image;
 
 	public Set<ExemplaireBean> exemplaires;
-	
 
 	public int getId() {
 		return id;

@@ -3,21 +3,20 @@ package com.library.LibraryBatch.bean;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope=EmprunteurAuth.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = EmprunteurAuth.class)
 public class EmprunteurAuth {
-	
+
 	private int id;
-	
+
 	private String identifiant;
-	
+
 	private String motDePasse;
-	
+
 	private String status;
-	
+
 	private String nom;
-	
+
 	private String prenom;
-	
 
 	public String getIdentifiant() {
 		return identifiant;
@@ -66,7 +65,5 @@ public class EmprunteurAuth {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-
 
 }

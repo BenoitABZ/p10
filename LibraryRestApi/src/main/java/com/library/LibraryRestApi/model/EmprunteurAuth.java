@@ -1,20 +1,18 @@
 package com.library.LibraryRestApi.model;
 
-
 public class EmprunteurAuth {
-	
+
 	private int id;
-	
+
 	private String identifiant;
-	
+
 	private String motDePasse;
-	
+
 	private String status;
-	
+
 	private String nom;
-	
+
 	private String prenom;
-	
 
 	public String getIdentifiant() {
 		return identifiant;
@@ -63,7 +61,5 @@ public class EmprunteurAuth {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-
 
 }

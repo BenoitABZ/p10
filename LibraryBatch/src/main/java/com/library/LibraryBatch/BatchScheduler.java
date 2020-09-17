@@ -1,11 +1,5 @@
 package com.library.LibraryBatch;
 
-
-
-
-
-
-
 import java.util.Date;
 
 import javax.batch.operations.JobRestartException;
@@ -25,31 +19,30 @@ import lombok.AllArgsConstructor;
 @Component
 @AllArgsConstructor
 public class BatchScheduler {
-	
+
 	@Autowired
 	Job job;
-	
+
 	@Autowired
 	JobLauncher jobLauncher;
-	
-	 //cron = "0 0 12 * * ?"
-			 
-     //fixedRate = 60000
-	 
-	 @Scheduled(fixedRate = 60000)
-	 public void schedule() throws JobParametersInvalidException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException  {
-		 Date date = new Date();
-		 try {
-			jobLauncher.run(job, new JobParametersBuilder()
-				        .addDate("date", date)
-				        .toJobParameters());
-			
+
+	// cron = "0 0 12 * * ?"
+
+	// fixedRate = 60000
+
+	@Scheduled(fixedRate = 60000)
+	public void schedule() throws JobParametersInvalidException, JobExecutionAlreadyRunningException,
+			JobRestartException, JobInstanceAlreadyCompleteException {
+		Date date = new Date();
+		try {
+			jobLauncher.run(job, new JobParametersBuilder().addDate("date", date).toJobParameters());
+
 			System.out.println("bonjour, vous avez du retard sur certains ouvrages empruntés sur notre réseau");
 		} catch (org.springframework.batch.core.repository.JobRestartException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-	 }
+	}
 
 }

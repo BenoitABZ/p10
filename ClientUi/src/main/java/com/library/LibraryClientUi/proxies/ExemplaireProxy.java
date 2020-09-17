@@ -11,23 +11,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.library.LibraryClientUi.beans.ExemplaireBean;
 
-
-@FeignClient(name="microservice-library", url="localhost:8080")
+@FeignClient(name = "microservice-library", url = "localhost:8080")
 public interface ExemplaireProxy {
-	
+
 	@GetMapping(value = "/Exemplaires")
 	public List<ExemplaireBean> getExemplaires();
-	
+
 	@GetMapping(value = "/Exemplaires/{exemplaireid}")
 	public ExemplaireBean getExemplaire(@PathVariable("exemplaireId") int exemplaireId);
-	
+
 	@GetMapping(value = "/search/Exemplaires/{ouvrageTitre}")
 	public List<ExemplaireBean> getExemplaireOuvrage(@PathVariable("ouvrageTitre") String ouvrageTitre);
-	
+
 	@PostMapping(value = "/Exemplaires")
 	public void ajouterExemplaire(@RequestBody ExemplaireBean exemplaire);
-	 
-	@DeleteMapping(value ="/Exemplaires/{exemplaireId}")
+
+	@DeleteMapping(value = "/Exemplaires/{exemplaireId}")
 	public void supprimerExemplaire(@PathVariable("exemplaireId") int exemplaireId);
 
 }

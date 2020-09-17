@@ -1,11 +1,8 @@
 package com.library.LibraryRestApi.configuration;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-
-import javax.annotation.PostConstruct;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,35 +10,26 @@ import org.springframework.stereotype.Service;
 
 import com.library.LibraryRestApi.model.Emprunteur;
 
-
 @Service
-public class UserDetailsImpl implements UserDetails{
-	
-	/**
-	 * 
-	 */
+public class UserDetailsImpl implements UserDetails {
+
 	private static final long serialVersionUID = 1L;
 
 	private String userName;
-	
+
 	private String password;
-	
-	 Set<GrantedAuthority> authorities=new HashSet<GrantedAuthority>();
-	
-	
-	  public UserDetailsImpl() {
-			
-		}
-		
+
+	Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+
+	public UserDetailsImpl() {
+
+	}
+
 	public UserDetailsImpl(Emprunteur emprunteur, Set<GrantedAuthority> authorities) {
-		
+
 		this.userName = emprunteur.getIdentifiant();
-		
 		this.password = emprunteur.getMotDePasse();
-		
-		this.authorities =  authorities;
-		
-		
+		this.authorities = authorities;
 	}
 
 	@Override

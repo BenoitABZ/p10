@@ -1,24 +1,16 @@
 package com.library.LibraryClientUi.beans;
 
-import java.time.LocalDate;
-
-
-
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = EmprunteurBean.class)
 
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope=EmprunteurBean.class)
 public class EmprunteurBean {
-	
-
 
 	public int id;
-    
+
 	public String nom;
 
 	public String prenom;
@@ -26,15 +18,15 @@ public class EmprunteurBean {
 	public String mail;
 
 	public String telephone;
-    
+
 	public String identifiant;
 
 	public String motDePasse;
 
 	public String dateInscription;
-    
+
 	public AdresseBean adresse;
-	
+
 	public Set<EmpruntBean> emprunts;
 
 	public int getId() {

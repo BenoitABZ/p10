@@ -2,35 +2,26 @@ package com.library.LibraryClientUi.beans;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope=ExemplaireBean.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = ExemplaireBean.class)
 
 public class ExemplaireBean implements Serializable {
-	
-	private static final long serialVersionUID = 1L; 
 
-	public Integer id; 
+	private static final long serialVersionUID = 1L;
+
+	public Integer id;
 
 	public String anneePublication;
-    
-	public String editeur;
-	
-	
-	public BibliothequeBean bibliotheque;
-	
-	
-	public EmpruntBean emprunt;
-	
-	public OuvrageBean ouvrage;
-	
 
+	public String editeur;
+
+	public BibliothequeBean bibliotheque;
+
+	public EmpruntBean emprunt;
+
+	public OuvrageBean ouvrage;
 
 	public int getId() {
 		return id;
@@ -79,6 +70,5 @@ public class ExemplaireBean implements Serializable {
 	public void setOuvrage(OuvrageBean ouvrage) {
 		this.ouvrage = ouvrage;
 	}
-
 
 }

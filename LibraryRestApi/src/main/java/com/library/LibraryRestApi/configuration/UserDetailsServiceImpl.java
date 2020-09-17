@@ -1,16 +1,9 @@
 package com.library.LibraryRestApi.configuration;
 
-
-
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,28 +16,18 @@ import com.library.LibraryRestApi.model.Emprunteur;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-	
+
 	@Autowired
 	EmprunteurDao emprunteurDao;
-	
-	
-	
+
 	@Override
-	public UserDetails loadUserByUsername(String identifiant) throws UsernameNotFoundException{
-	
-	Emprunteur emprunteur = (emprunteurDao.findByIdentifiant(identifiant)).orElseThrow(() -> new UsernameNotFoundException("Emprunteur non trouvé"));
-	
+	public UserDetails loadUserByUsername(String identifiant) throws UsernameNotFoundException {
 
-	  Set<GrantedAuthority> authorities = new HashSet<>();
-	    authorities.add(new SimpleGrantedAuthority("USER"));
-	    return new UserDetailsImpl(
-	            emprunteur,
-	          
-	            authorities);
+		Emprunteur emprunteur = (emprunteurDao.findByIdentifiant(identifiant))
+				.orElseThrow(() -> new UsernameNotFoundException("Emprunteur non trouvé"));
+
+		Set<GrantedAuthority> authorities = new HashSet<>();
+		authorities.add(new SimpleGrantedAuthority("USER"));
+		return new UserDetailsImpl(emprunteur, authorities);
 	}
-	
-
-    }
-	
-	
-
+}

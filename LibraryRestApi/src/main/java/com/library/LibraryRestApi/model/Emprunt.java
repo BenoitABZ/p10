@@ -1,6 +1,5 @@
 package com.library.LibraryRestApi.model;
 
-
 import java.io.Serializable;
 
 import java.time.LocalDate;
@@ -18,40 +17,35 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope=Emprunt.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Emprunt.class)
+public class Emprunt implements Serializable {
 
-public class Emprunt implements Serializable{
-	
-	private static final long serialVersionUID = 1L; 
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @SequenceGenerator(name="identifier", sequenceName="emprunt_emprunt_id_seq", allocationSize=1)  
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="identifier")
-    @Column(name="id_emprunt")
-    private Integer id;
-    
-    @Column(name="date_emprunt")
-    private LocalDate dateEmprunt;
-    
-    @Column(name="date_retour")
-    private LocalDate dateRetour;
-    
-    @Column(name="prolongation")
-    private Boolean prolongation;
-    
-    
-    @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name="id_exemplaire")
-    private Exemplaire exemplaire;
-    
-    
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinColumn(name="id_emprunteur")
+	@Id
+	@SequenceGenerator(name = "identifier", sequenceName = "emprunt_emprunt_id_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "identifier")
+	@Column(name = "id_emprunt")
+	private Integer id;
+
+	@Column(name = "date_emprunt")
+	private LocalDate dateEmprunt;
+
+	@Column(name = "date_retour")
+	private LocalDate dateRetour;
+
+	@Column(name = "prolongation")
+	private Boolean prolongation;
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name = "id_exemplaire")
+	private Exemplaire exemplaire;
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name = "id_emprunteur")
 	private Emprunteur emprunteur;
 
 	public Integer getId() {
@@ -102,8 +96,4 @@ public class Emprunt implements Serializable{
 		this.emprunteur = emprunteur;
 	}
 
-
-    
-
 }
-

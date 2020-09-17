@@ -12,20 +12,18 @@ import com.library.LibraryClientUi.proxies.BibliothequeProxy;
 
 @Controller
 public class BibliothequeClientController {
-	
+
 	@Autowired
 	BibliothequeProxy bibliothequeProxy;
-	
+
 	@RequestMapping("/Liste-sites")
 	public String listerBibliotheques(Model model) {
-		
-        	
+
 		List<BibliothequeBean> bibliotheques = bibliothequeProxy.getBibliotheques();
-		
+
 		model.addAttribute("bibliotheques", bibliotheques);
-		
+
 		return ("Liste-sites");
 
-
-    }
+	}
 }

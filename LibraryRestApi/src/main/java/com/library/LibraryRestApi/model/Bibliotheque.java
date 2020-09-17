@@ -1,114 +1,106 @@
 package com.library.LibraryRestApi.model;
 
 import java.io.Serializable;
-import java.util.HashSet;
+
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope=Bibliotheque.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Bibliotheque.class)
+public class Bibliotheque implements Serializable {
 
-public class Bibliotheque implements Serializable{
-	
-	private static final long serialVersionUID = 1L; 
-	
-	    @Id
-	    @SequenceGenerator(name="identifier", sequenceName="bibliotheque_bibliotheque_id_seq", allocationSize=1)  
-	    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="identifier")
-	    @Column(name="id_bibliotheque")
-	    private Integer id;
-	    
-	    @Column(name="nom")
-	    private String nom;
-	    
-	    @Column(name="telephone")
-	    private String telephone;
-	    
-		@Column(name="mail")
-	    private String mail;
-		
-		@Column(name="image")
-		private String image;
-	 
-		@Embedded		
-	    private Adresse adresse;
-	    
-		
-	    @OneToMany(mappedBy="bibliotheque", cascade=CascadeType.PERSIST)
-		private Set<Exemplaire> exemplaires;
+	private static final long serialVersionUID = 1L;
 
-		public Integer getId() {
-			return id;
-		}
+	@Id
+	@SequenceGenerator(name = "identifier", sequenceName = "bibliotheque_bibliotheque_id_seq", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "identifier")
+	@Column(name = "id_bibliotheque")
+	private Integer id;
 
-		public void setId(Integer id) {
-			this.id = id;
-		}
+	@Column(name = "nom")
+	private String nom;
 
-		public String getNom() {
-			return nom;
-		}
+	@Column(name = "telephone")
+	private String telephone;
 
-		public void setNom(String nom) {
-			this.nom = nom;
-		}
-		
-	    public String getTelephone() {
-			return telephone;
-	    }
+	@Column(name = "mail")
+	private String mail;
 
-	    public void setTelephone(String telephone) {
-			this.telephone = telephone;
-		}
-			
-			   
-		public String getMail() {
-			return mail;
-		}
+	@Column(name = "image")
+	private String image;
 
-		public void setMail(String mail) {
-			this.mail = mail;
-		}
+	@Embedded
+	private Adresse adresse;
 
-		public Adresse getAdresse() {
-			return adresse;
-		}
+	@OneToMany(mappedBy = "bibliotheque", cascade = CascadeType.PERSIST)
+	private Set<Exemplaire> exemplaires;
 
-		public void setAdresse(Adresse adresse) {
-			this.adresse = adresse;
-		}
-		
-		public String getImage() {
-			return image;
-		}
+	public Integer getId() {
+		return id;
+	}
 
-		public void setImage(String image) {
-			this.image = image;
-		}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-		public Set<Exemplaire> getExemplaires() {
-			return exemplaires;
-		}
+	public String getNom() {
+		return nom;
+	}
 
-		public void setExemplaires(Set<Exemplaire> exemplaires) {
-			this.exemplaires = exemplaires;
-		}
-	
-	
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public Adresse getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public Set<Exemplaire> getExemplaires() {
+		return exemplaires;
+	}
+
+	public void setExemplaires(Set<Exemplaire> exemplaires) {
+		this.exemplaires = exemplaires;
+	}
 
 }

@@ -4,53 +4,44 @@
 <meta charset="UTF-8">
 <title>Liste des sites</title>
 
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
-
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
 </head>
 
-<body style="background-color:#F0E0B5;">
-<div th:replace="~{fragments/Header :: header}"></div>
+<body style="background-color: #F0E0B5;">
+	<div th:replace="~{fragments/Header :: header}"></div>
 
+	<div th:replace="~{fragments/Nav :: nav}"></div>
 
+	<div th:each="bibliotheque : ${bibliotheques}" class="col-md-6 mx-auto mt-5 text-center">
+		<div class="card" style="margin: 13px; background-color: #F0E0B5;">
+			<div class="row">
+				<h1 style="padding: 15px; text-align: center"th:text="${bibliotheque.nom}"></h1>
+				<img th:src="${bibliotheque.image}" class="card-img-top" />
+				<div class="card-body">
+					<h4 class="card-title">Coordonnées</h4>
+					<ul class="text-left" style="margin: 13px">
+						<li th:text="|Adresse: ${bibliotheque.adresse.numeroVoie} ${bibliotheque.adresse.libelleVoie} ${bibliotheque.adresse.nomVoie} ${bibliotheque.adresse.codePostal} ${bibliotheque.adresse.ville}|"></li>
+						<li th:text="|Tèl: ${bibliotheque.telephone}|"></li>
+						<li th:text="|mail: ${bibliotheque.mail}|"></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 
-<div th:replace="~{fragments/Nav :: nav}"></div>
+	<div th:replace="~{fragments/Footer :: footer}"></div>
 
- <div th:each="bibliotheque : ${bibliotheques}" class="col-md-6 mx-auto mt-5 text-center">
-  <div class="card" style="margin:13px; background-color:#F0E0B5;">
-
-
-    <div class="row">
-    
-        
-            
-                 <h1 style="padding:15px;text-align: center"th:text= "${bibliotheque.nom}"></h1>
-                <img th:src="${bibliotheque.image}"  class="card-img-top" />
-                 <div class="card-body">
-                <h4 class="card-title">Coordonnées</h4>
-                <ul class="text-left" style="margin:13px">
-                <li th:text= "|Adresse: ${bibliotheque.adresse.numeroVoie} ${bibliotheque.adresse.libelleVoie} ${bibliotheque.adresse.nomVoie} ${bibliotheque.adresse.codePostal} ${bibliotheque.adresse.ville}|"></li>
-                <li th:text= "|Tèl: ${bibliotheque.telephone}|"></li>
-                <li th:text= "|mail: ${bibliotheque.mail}|"></li>
-                </ul>
-         </div>   
-        </div>
-     </div>
-</div>
-
-
-
-
-
-
-<div th:replace="~{fragments/Footer :: footer}"></div>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.3.3/umd/popper.min.js"></script> 
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.3.3/umd/popper.min.js"></script>
 
 </body>
 </html>

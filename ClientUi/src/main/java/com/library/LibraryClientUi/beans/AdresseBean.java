@@ -2,27 +2,17 @@ package com.library.LibraryClientUi.beans;
 
 import java.io.Serializable;
 
-import lombok.Getter;
-import lombok.Setter;
-
-
 public class AdresseBean implements Serializable {
-	
 
 	private static final long serialVersionUID = 1L;
 
-	
 	private String numeroVoie;
-	
-	
+
 	private String libelleVoie;
 
-	
 	private String nomVoie;
 
-	
 	private String codePostal;
-
 
 	private String ville;
 

@@ -1,29 +1,26 @@
 package com.library.LibraryRestApi.model;
 
-import javax.persistence.Column;
+public class OuvrageAuth {
 
-public class OuvrageAuth {  
-	
 	private int id;
 
 	private String titre;
 
-    private String auteur;
-    
-    private String categorie;
+	private String auteur;
 
-    private String resume;
+	private String categorie;
+
+	private String resume;
 
 	private String anneeParution;
 
-    private Boolean disponibilite;
-   
-    private String image;
+	private Boolean disponibilite;
 
-    private int nombreExemplaires;
-    
-    
-    public int getId() {
+	private String image;
+
+	private int nombreExemplaires;
+
+	public int getId() {
 		return id;
 	}
 
@@ -94,6 +91,5 @@ public class OuvrageAuth {
 	public void setNombreExemplaires(int nombreExemplaires) {
 		this.nombreExemplaires = nombreExemplaires;
 	}
-
 
 }
