@@ -14,4 +14,7 @@ INSERT INTO EXEMPLAIRE (id_exemplaire, annee_publication, editeur, id_bibliotheq
 INSERT INTO EMPRUNT (id_emprunt, date_emprunt, date_retour, prolongation, id_emprunteur, id_exemplaire) VALUES (1, '2020-05-01', '2020-05-29', false, 1, 1);
 INSERT INTO EMPRUNT (id_emprunt, date_emprunt, date_retour, prolongation, id_emprunteur, id_exemplaire) VALUES (2, '2020-01-07', '2020-01-24', false, 1, 2); 
 
+INSERT INTO RESERVATION(id_reservation, date_reservation, id_emprunteur, id_ouvrage) VALUES (1, '2020-09-21', 1, 2);
+ 
+
 
