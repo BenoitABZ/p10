@@ -51,6 +51,10 @@ public class Ouvrage implements Serializable {
 	@OneToMany(mappedBy = "ouvrage", cascade = CascadeType.ALL)
 	private Set<Exemplaire> exemplaires;
 
+	@OneToMany(mappedBy = "ouvrage", cascade = CascadeType.ALL)
+	private Set<Reservation> reservations;
+
+	
 	public Integer getId() {
 		return id;
 	}

@@ -43,4 +43,32 @@ public class Reservation implements Serializable {
 		return id;
 	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public LocalDate getDateReservation() {
+		return dateReservation;
+	}
+
+	public void setDateReservation(LocalDate dateReservation) {
+		this.dateReservation = dateReservation;
+	}
+
+	public Ouvrage getOuvrage() {
+		return ouvrage;
+	}
+
+	public void setOuvrage(Ouvrage ouvrage) {
+		this.ouvrage = ouvrage;
+	}
+
+	public Emprunteur getEmprunteur() {
+		return emprunteur;
+	}
+
+	public void setEmprunteur(Emprunteur emprunteur) {
+		this.emprunteur = emprunteur;
+	}
+
 }

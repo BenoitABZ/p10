@@ -55,6 +55,9 @@ public class Emprunteur implements Serializable {
 
 	@OneToMany(mappedBy = "emprunteur", cascade = CascadeType.ALL)
 	private Set<Emprunt> emprunts;
+	
+	@OneToMany(mappedBy = "emprunteur", cascade = CascadeType.ALL)
+	private Set<Reservation> reservations;
 
 	public Integer getId() {
 		return id;
