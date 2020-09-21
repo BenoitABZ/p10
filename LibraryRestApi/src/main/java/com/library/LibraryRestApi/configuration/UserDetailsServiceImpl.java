@@ -28,6 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		Set<GrantedAuthority> authorities = new HashSet<>();
 		authorities.add(new SimpleGrantedAuthority("USER"));
+
 		return new UserDetailsImpl(emprunteur, authorities);
 	}
 }

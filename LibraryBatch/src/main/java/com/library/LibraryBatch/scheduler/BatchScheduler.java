@@ -38,8 +38,9 @@ public class BatchScheduler {
 			jobLauncher.run(job, new JobParametersBuilder().addDate("date", date).toJobParameters());
 
 			System.out.println("bonjour, vous avez du retard sur certains ouvrages empruntés sur notre réseau");
+
 		} catch (org.springframework.batch.core.repository.JobRestartException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 

@@ -38,6 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		auth.inMemoryAuthentication().withUser("utilisateur").password(passwordEncoder.encode("mdp"))
 				.authorities("USER");
+
 	}
 
 	@Bean
@@ -56,15 +57,32 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				 * .antMatchers("/Search/Emprunts/**").permitAll()
 				 * .antMatchers("/Search/Ouvrages").permitAll()
 				 */
-				.antMatchers("/h2-console/**").permitAll().antMatchers("/Liste-emprunts").authenticated().anyRequest()
-				.authenticated().and().formLogin().loginProcessingUrl("/login")
-				.successHandler(new AuthentificationLoginSuccessHandler())
-				.failureHandler(new SimpleUrlAuthenticationFailureHandler()).permitAll().and().logout()
-				.logoutUrl("/logout").logoutSuccessHandler(new AuthentificationLogoutSuccessHandler())
-				.invalidateHttpSession(true).permitAll();
+			.antMatchers("/h2-console/**")
+			.permitAll()
+			.antMatchers("/Liste-emprunts")
+			.authenticated()
+			.anyRequest()
+			.authenticated()
+			.and()
+			.formLogin()
+			.loginProcessingUrl("/login")
+			.successHandler(new AuthentificationLoginSuccessHandler())
+			.failureHandler(new SimpleUrlAuthenticationFailureHandler())
+			.permitAll()
+			.and()
+			.logout()
+			.logoutUrl("/logout")
+			.logoutSuccessHandler(new AuthentificationLogoutSuccessHandler())
+			.invalidateHttpSession(true)
+			.permitAll();
 
-		http.csrf().disable().exceptionHandling().authenticationEntryPoint(new Http403ForbiddenEntryPoint());
-		http.headers().frameOptions().disable();
+		http.csrf()
+		    .disable()
+		    .exceptionHandling()
+		    .authenticationEntryPoint(new Http403ForbiddenEntryPoint());
+		http.headers()
+		    .frameOptions()
+		    .disable();
 	}
 
 	private class AuthentificationLoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
@@ -82,5 +100,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			response.setStatus(HttpServletResponse.SC_OK);
 		}
 	}
-
 }
