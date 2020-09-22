@@ -1,6 +1,6 @@
 package com.library.LibraryRestApi.model;
 
-public class EmprunteurAuth {
+public class EmprunteurDto {
 
 	private int id;
 
