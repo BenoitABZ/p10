@@ -1,6 +1,6 @@
-package com.library.LibraryRestApi.model;
+package com.library.LibraryRestApi.dto;
 
-public class OuvrageAuth {
+public class OuvrageDto {
 
 	private int id;
 

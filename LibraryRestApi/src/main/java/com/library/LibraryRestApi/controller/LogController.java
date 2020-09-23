@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.library.LibraryRestApi.dao.EmprunteurDao;
+import com.library.LibraryRestApi.dto.EmprunteurDto;
 import com.library.LibraryRestApi.model.Emprunteur;
-import com.library.LibraryRestApi.model.EmprunteurDto;
 
 @RestController
 public class LogController {

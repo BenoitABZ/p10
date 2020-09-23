@@ -1,4 +1,4 @@
-package com.library.LibraryRestApi.model;
+package com.library.LibraryRestApi.dto;
 
 public class EmprunteurDto {
 
