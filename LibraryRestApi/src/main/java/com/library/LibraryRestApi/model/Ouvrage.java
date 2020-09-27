@@ -54,7 +54,6 @@ public class Ouvrage implements Serializable {
 	@OneToMany(mappedBy = "ouvrage", cascade = CascadeType.ALL)
 	private Set<Reservation> reservations;
 
-	
 	public Integer getId() {
 		return id;
 	}
@@ -125,6 +124,18 @@ public class Ouvrage implements Serializable {
 
 	public void setExemplaires(Set<Exemplaire> exemplaires) {
 		this.exemplaires = exemplaires;
+	}
+
+	public Set<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(Set<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.library.LibraryRestApi.dto;
 
+import java.time.LocalDate;
+
 public class OuvrageDto {
 
 	private int id;
@@ -19,6 +21,10 @@ public class OuvrageDto {
 	private String image;
 
 	private int nombreExemplaires;
+
+	private LocalDate closerDate;
+
+	private int nombreReservations;
 
 	public int getId() {
 		return id;
@@ -90,6 +96,22 @@ public class OuvrageDto {
 
 	public void setNombreExemplaires(int nombreExemplaires) {
 		this.nombreExemplaires = nombreExemplaires;
+	}
+
+	public LocalDate getCloserDate() {
+		return closerDate;
+	}
+
+	public void setCloserDate(LocalDate closerDate) {
+		this.closerDate = closerDate;
+	}
+
+	public int getNombreReservations() {
+		return nombreReservations;
+	}
+
+	public void setNombreReservations(int nombreReservations) {
+		this.nombreReservations = nombreReservations;
 	}
 
 }

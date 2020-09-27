@@ -1,7 +1,9 @@
 package com.library.LibraryRestApi.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.library.LibraryRestApi.dao.OuvrageDao;
 import com.library.LibraryRestApi.dto.OuvrageDto;
+import com.library.LibraryRestApi.model.Exemplaire;
 import com.library.LibraryRestApi.model.Ouvrage;
 
 @RestController
@@ -66,6 +69,33 @@ public class OuvrageController {
 
 				ouvrageDto.setNombreExemplaires(nombreExemplaires);
 
+				int nombreReservations = ouvrage.getReservations().size();
+
+				ouvrageDto.setNombreReservations(nombreReservations);
+
+				Set<Exemplaire> exemplaires = ouvrage.getExemplaires();
+
+				for (Exemplaire exemplaireBoucle1 : exemplaires) {
+
+					LocalDate dateBoucle1 = exemplaireBoucle1.getEmprunt().getDateRetour();
+
+					ouvrageDto.setCloserDate(dateBoucle1);
+
+					for (Exemplaire exemplaireBoucle2 : exemplaires) {
+
+						LocalDate dateBoucle2 = exemplaireBoucle2.getEmprunt().getDateRetour();
+
+						if (dateBoucle1.isAfter(dateBoucle2)) {
+
+							ouvrageDto.setCloserDate(null);
+
+							break;
+						}
+
+					}
+
+				}
+
 				ouvragesBuff.add(ouvrageDto);
 
 			}
@@ -99,6 +129,33 @@ public class OuvrageController {
 				int nombreExemplaires = ouvrage.getExemplaires().size();
 
 				ouvrageDto.setNombreExemplaires(nombreExemplaires);
+
+				int nombreReservations = ouvrage.getReservations().size();
+
+				ouvrageDto.setNombreReservations(nombreReservations);
+
+				Set<Exemplaire> exemplaires = ouvrage.getExemplaires();
+
+				for (Exemplaire exemplaireBoucle1 : exemplaires) {
+
+					LocalDate dateBoucle1 = exemplaireBoucle1.getEmprunt().getDateRetour();
+
+					ouvrageDto.setCloserDate(dateBoucle1);
+
+					for (Exemplaire exemplaireBoucle2 : exemplaires) {
+
+						LocalDate dateBoucle2 = exemplaireBoucle2.getEmprunt().getDateRetour();
+
+						if (dateBoucle1.isAfter(dateBoucle2)) {
+
+							ouvrageDto.setCloserDate(null);
+
+							break;
+						}
+
+					}
+
+				}
 
 				ouvragesBuff.add(ouvrageDto);
 

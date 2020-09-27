@@ -1,7 +1,9 @@
 package com.library.LibraryRestApi.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.library.LibraryRestApi.dao.ReservationDao;
+import com.library.LibraryRestApi.dto.ReservationDto;
+import com.library.LibraryRestApi.model.Emprunt;
 import com.library.LibraryRestApi.model.Reservation;
 
 @RestController
@@ -65,9 +69,42 @@ public class ReservationController {
 	}
 
 	@PostMapping(value = "/Reservation")
-	public void ajouterReservation(@RequestBody Reservation reservation) {
+	public ReservationDto ajouterReservation(@RequestBody Reservation reservation) {
+
+		ReservationDto reservationDto = new ReservationDto();
+
+		Set<Emprunt> emprunts = reservation.getEmprunteur().getEmprunts();
+
+		for (Emprunt emprunt : emprunts) {
+
+			if ((reservation.getOuvrage()).equals(emprunt.getExemplaire().getOuvrage())) {
+				reservationDto.setAutorisation(false);
+
+				reservationDto.setMessage("Vous ne pouvez reserver un ouvrage que vous avez deja emprunté");
+
+				return reservationDto;
+			}
+		}
+
+		if (reservation.getOuvrage().getReservations().size() >= 2 * reservation.getOuvrage().getExemplaires().size()) {
+
+			reservationDto.setAutorisation(false);
+
+			reservationDto.setMessage(
+					"La liste de réservation ne peut comporter qu’un maximum de personnes correspondant à 2x le nombre d’exemplaires de l’ouvrage");
+
+			return reservationDto;
+
+		}
+		reservationDto.setAutorisation(true);
+
+		reservation.setDateReservation(LocalDate.now());
+
+		reservationDto.setMessage("Vous avez reservé l'ouvrage");
 
 		reservationDao.save(reservation);
+
+		return reservationDto;
 
 	}
 
