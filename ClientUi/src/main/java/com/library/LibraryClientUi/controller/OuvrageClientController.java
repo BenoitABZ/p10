@@ -15,7 +15,7 @@ import com.library.LibraryClientUi.proxies.OuvrageProxy;
 
 @Controller
 public class OuvrageClientController {
-
+	
 	@Autowired
 	OuvrageProxy ouvrageProxy;
 
@@ -36,5 +36,4 @@ public class OuvrageClientController {
 		return "Liste-ouvrages";
 
 	}
-
 }

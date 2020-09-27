@@ -105,13 +105,22 @@ public class ReservationController {
 				return reservationDto;
 			}
 		}
+		
+		if (reservation.getOuvrage().getDisponibilite()==true) {
+
+			reservationDto.setAutorisation(false);
+
+			reservationDto.setMessage("Cet ouvrage est disponible, inutile de le reserver");
+
+			return reservationDto;
+
+		}
 
 		if (reservation.getOuvrage().getReservations().size() >= 2 * reservation.getOuvrage().getExemplaires().size()) {
 
 			reservationDto.setAutorisation(false);
 
-			reservationDto.setMessage(
-					"La liste de réservation ne peut comporter qu’un maximum de personnes correspondant à 2x le nombre d’exemplaires de l’ouvrage");
+			reservationDto.setMessage("La liste de réservation ne peut comporter qu’un maximum de personnes correspondant à 2x le nombre d’exemplaires de l’ouvrage");
 
 			return reservationDto;
 
