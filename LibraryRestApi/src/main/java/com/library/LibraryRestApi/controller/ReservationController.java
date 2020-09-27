@@ -25,11 +25,11 @@ public class ReservationController {
 	ReservationDao reservationDao;
 
 	@GetMapping(value = "/Search/Reservations/{emprunteurId}")
-	public List<Reservation> getReservationsEmprunteur(@PathVariable("emprunteurId") int emprunteurId) {
+	public List<ReservationDto> getReservationsEmprunteur(@PathVariable("emprunteurId") int emprunteurId) {
 
 		List<Reservation> reservations = reservationDao.findAll();
 
-		List<Reservation> reservationBuff = new ArrayList<Reservation>();
+		List<ReservationDto> reservationsBuff = new ArrayList<ReservationDto>();
 
 		for (Reservation reservation : reservations) {
 
@@ -37,13 +37,33 @@ public class ReservationController {
 
 			if (id == emprunteurId) {
 
-				reservationBuff.add(reservation);
+				ReservationDto reservationDto = new ReservationDto();
+
+				reservationDto.setId(reservation.getId());
+
+				reservationDto.setDateReservation(reservation.getDateReservation());
+
+				Set<Reservation> reservationsOuvrage = reservation.getOuvrage().getReservations();
+
+				for (Reservation reservationOuvrage : reservationsOuvrage) {
+
+					int count = 1;
+
+					count++;
+
+					if (id == reservationOuvrage.getEmprunteur().getId()) {
+
+						reservationDto.setPositionListe(count);
+					}
+				}
+
+				reservationsBuff.add(reservationDto);
 
 			}
 
 		}
 
-		return reservationBuff;
+		return reservationsBuff;
 	}
 
 	@GetMapping(value = "/Search/Reservations/{ouvrageId}")
