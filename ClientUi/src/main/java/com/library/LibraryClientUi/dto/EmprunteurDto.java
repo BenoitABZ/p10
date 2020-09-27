@@ -1,6 +1,6 @@
-package com.library.LibraryClientUi.beans;
+package com.library.LibraryClientUi.dto;
 
-public class EmprunteurAuth {
+public class EmprunteurDto {
 
 	public int id;
 

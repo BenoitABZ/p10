@@ -10,7 +10,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.library.LibraryClientUi.beans.OuvrageAuth;
+import com.library.LibraryClientUi.dto.OuvrageDto;
 import com.library.LibraryClientUi.proxies.OuvrageProxy;
 
 @Controller
@@ -29,7 +29,7 @@ public class OuvrageClientController {
 			keyString = "null";
 		}
 
-		List<OuvrageAuth> ouvrages = ouvrageProxy.getSelectOuvrages(keyString);
+		List<OuvrageDto> ouvrages = ouvrageProxy.getSelectOuvrages(keyString);
 
 		model.addAttribute("ouvrages", ouvrages);
 

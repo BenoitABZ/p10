@@ -1,6 +1,8 @@
-package com.library.LibraryClientUi.beans;
+package com.library.LibraryClientUi.dto;
 
-public class OuvrageAuth {
+import java.time.LocalDate;
+
+public class OuvrageDto {
 
 	private int id;
 
@@ -19,6 +21,10 @@ public class OuvrageAuth {
 	private String image;
 
 	private int nombreExemplaires;
+
+	private LocalDate closerDate;
+
+	private int nombreReservations;
 
 	public int getId() {
 		return id;
@@ -92,4 +98,21 @@ public class OuvrageAuth {
 		this.nombreExemplaires = nombreExemplaires;
 	}
 
+	public LocalDate getCloserDate() {
+		return closerDate;
+	}
+
+	public void setCloserDate(LocalDate closerDate) {
+		this.closerDate = closerDate;
+	}
+
+	public int getNombreReservations() {
+		return nombreReservations;
+	}
+
+	public void setNombreReservations(int nombreReservations) {
+		this.nombreReservations = nombreReservations;
+	}
+
 }
+

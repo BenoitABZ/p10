@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.library.LibraryClientUi.beans.EmpruntBean;
-import com.library.LibraryClientUi.beans.EmprunteurAuth;
+import com.library.LibraryClientUi.dto.EmprunteurDto;
 import com.library.LibraryClientUi.proxies.EmpruntProxy;
 
 @Controller
@@ -37,15 +37,15 @@ public class EmpruntClientController {
 	@GetMapping("/Liste-emprunts")
 	public String listerEmprunts(Model model, HttpServletRequest req) {
 
-		EmprunteurAuth emprunteurAuth = new EmprunteurAuth();
+		EmprunteurDto emprunteurDto = new EmprunteurDto();
 
 		HttpSession session = req.getSession();
 
 		if (session.getAttribute("emprunteur") != null) {
 
-			emprunteurAuth = (EmprunteurAuth) session.getAttribute("emprunteur");
+			emprunteurDto = (EmprunteurDto) session.getAttribute("emprunteur");
 
-			int id = emprunteurAuth.getId();
+			int id = emprunteurDto.getId();
 
 			List<EmpruntBean> emprunts = empruntProxy.getEmpruntsEmprunteur(id);
 
