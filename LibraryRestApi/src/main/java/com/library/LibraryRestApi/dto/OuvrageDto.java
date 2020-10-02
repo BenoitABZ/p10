@@ -26,6 +26,8 @@ public class OuvrageDto {
 
 	private int nombreReservations;
 
+	private ReservationDto reservationDto;
+
 	public int getId() {
 		return id;
 	}
@@ -112,6 +114,14 @@ public class OuvrageDto {
 
 	public void setNombreReservations(int nombreReservations) {
 		this.nombreReservations = nombreReservations;
+	}
+
+	public ReservationDto getReservationDto() {
+		return reservationDto;
+	}
+
+	public void setReservationDto(ReservationDto reservationDto) {
+		this.reservationDto = reservationDto;
 	}
 
 }

@@ -13,9 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.library.LibraryRestApi.dao.EmprunteurDao;
+import com.library.LibraryRestApi.dao.OuvrageDao;
 import com.library.LibraryRestApi.dao.ReservationDao;
+import com.library.LibraryRestApi.dto.OuvrageDto;
 import com.library.LibraryRestApi.dto.ReservationDto;
 import com.library.LibraryRestApi.model.Emprunt;
+import com.library.LibraryRestApi.model.Emprunteur;
+import com.library.LibraryRestApi.model.Ouvrage;
 import com.library.LibraryRestApi.model.Reservation;
 
 @RestController
@@ -23,6 +28,12 @@ public class ReservationController {
 
 	@Autowired
 	ReservationDao reservationDao;
+
+	@Autowired
+	OuvrageDao ouvrageDao;
+
+	@Autowired
+	EmprunteurDao emprunteurDao;
 
 	@GetMapping(value = "/Search/Reservations/{emprunteurId}")
 	public List<ReservationDto> getReservationsEmprunteur(@PathVariable("emprunteurId") int emprunteurId) {
@@ -43,7 +54,22 @@ public class ReservationController {
 
 				reservationDto.setDateReservation(reservation.getDateReservation());
 
-				Set<Reservation> reservationsOuvrage = reservation.getOuvrage().getReservations();
+				Ouvrage ouvrage = reservation.getOuvrage();
+
+				OuvrageDto ouvrageDto = new OuvrageDto();
+
+				ouvrageDto.setId(ouvrage.getId());
+				ouvrageDto.setAnneeParution(ouvrage.getAnneeParution());
+				ouvrageDto.setTitre(ouvrage.getTitre());
+				ouvrageDto.setAuteur(ouvrage.getAuteur());
+				ouvrageDto.setResume(ouvrage.getResume());
+				ouvrageDto.setCategorie(ouvrage.getCategorie());
+				ouvrageDto.setImage(ouvrage.getImage());
+				ouvrageDto.setDisponibilite(ouvrage.getDisponibilite());
+
+				reservationDto.setOuvrageDto(ouvrageDto);
+
+				Set<Reservation> reservationsOuvrage = ouvrage.getReservations();
 
 				for (Reservation reservationOuvrage : reservationsOuvrage) {
 
@@ -88,16 +114,19 @@ public class ReservationController {
 		return reservationBuff;
 	}
 
-	@PostMapping(value = "/Reservation")
-	public ReservationDto ajouterReservation(@RequestBody Reservation reservation) {
+	@PostMapping(value = "/Reservations/CheckReservation")
+	public ReservationDto checkReservation(@RequestBody ReservationDto reservationDto) {
 
-		ReservationDto reservationDto = new ReservationDto();
+		Ouvrage ouvrage = ouvrageDao.findById(reservationDto.getOuvrageDto().getId());
 
-		Set<Emprunt> emprunts = reservation.getEmprunteur().getEmprunts();
+		Emprunteur emprunteur = emprunteurDao.findById(reservationDto.getEmprunteurDto().getId()).get();
+
+		Set<Emprunt> emprunts = emprunteur.getEmprunts();
 
 		for (Emprunt emprunt : emprunts) {
 
-			if ((reservation.getOuvrage()).equals(emprunt.getExemplaire().getOuvrage())) {
+			if (ouvrage.getTitre().equals(emprunt.getExemplaire().getOuvrage().getTitre())) {
+
 				reservationDto.setAutorisation(false);
 
 				reservationDto.setMessage("Vous ne pouvez reserver un ouvrage que vous avez deja emprunté");
@@ -105,8 +134,8 @@ public class ReservationController {
 				return reservationDto;
 			}
 		}
-		
-		if (reservation.getOuvrage().getDisponibilite()==true) {
+
+		if (ouvrage.getDisponibilite() == true) {
 
 			reservationDto.setAutorisation(false);
 
@@ -116,31 +145,61 @@ public class ReservationController {
 
 		}
 
-		if (reservation.getOuvrage().getReservations().size() >= 2 * reservation.getOuvrage().getExemplaires().size()) {
+		if (ouvrage.getReservations().size() >= 2 * ouvrage.getExemplaires().size()) {
 
 			reservationDto.setAutorisation(false);
 
-			reservationDto.setMessage("La liste de réservation ne peut comporter qu’un maximum de personnes correspondant à 2x le nombre d’exemplaires de l’ouvrage");
+			reservationDto.setMessage(
+					"La liste de réservation ne peut comporter qu’un maximum de personnes correspondant à 2x le nombre d’exemplaires de l’ouvrage");
 
 			return reservationDto;
 
 		}
 		reservationDto.setAutorisation(true);
 
-		reservation.setDateReservation(LocalDate.now());
+		reservationDto.setDateReservation(LocalDate.now());
 
-		reservationDto.setMessage("Vous avez reservé l'ouvrage");
-
-		reservationDao.save(reservation);
+		reservationDto.setMessage("Vous pouvez reserver l'ouvrage");
 
 		return reservationDto;
 
 	}
 
-	@DeleteMapping(value = "/Reservationss/{reservationId}")
-	public void supprimerReservation(@PathVariable int id) {
+	@PostMapping(value = "/Reservations")
+	public ReservationDto ajouterReservation(@RequestBody ReservationDto reservationDto) {
 
-		reservationDao.deleteById(id);
+		if (reservationDto.isAutorisation()) {
+
+			Ouvrage ouvrage = ouvrageDao.findById(reservationDto.getOuvrageDto().getId());
+
+			Emprunteur emprunteur = emprunteurDao.findById(reservationDto.getEmprunteurDto().getId()).get();
+
+			Reservation reservation = new Reservation();
+
+			reservation.setDateReservation(reservationDto.getDateReservation());
+
+			reservation.setEmprunteur(emprunteur);
+
+			reservation.setOuvrage(ouvrage);
+
+			reservationDao.save(reservation);
+
+			reservationDto.setMessage("L'ouvrage est reservé");
+
+			return reservationDto;
+
+		} else {
+
+			reservationDto.setMessage("Vous ne pouvez pas reserver cet ouvrage");
+
+			return reservationDto;
+		}
+
 	}
 
+	@DeleteMapping(value = "/Reservationss/{reservationId}")
+	public void supprimerReservation(@PathVariable("reservationId") int reservationId) {
+
+		reservationDao.deleteById(reservationId);
+	}
 }
