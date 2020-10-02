@@ -27,7 +27,7 @@ public class ReservationClientController {
 	@Autowired
 	OuvrageProxy ouvrageProxy;
 
-	@GetMapping(value = "Reservations/{ouvrageId}")
+	@GetMapping(value = "/Reservations/{ouvrageId}")
 	public String ajouterReservation(@PathVariable("ouvrageId") int ouvrageId, Model model, HttpServletRequest req) {
 
 		HttpSession session = req.getSession();
@@ -58,7 +58,7 @@ public class ReservationClientController {
 
 		List<ReservationDto> reservationsDto = reservationProxy.getReservationsEmprunteur(emprunteurDto.getId());
 
-		model.addAttribute("reservationsDto", reservationsDto);
+		model.addAttribute("reservations", reservationsDto);
 
 		return "Liste-reservations";
 	}
