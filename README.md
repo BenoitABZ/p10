@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> develop
 I'am an OC student finishing his tenth project.
 
 The purpose of this project is to create a website for the library network of a municipality. Users will be able to consult the list of available books, the number of copies remaining, the list of their loans and may extend them. Requests relating to the management of loans and returns for staff is implemented, it only remains to design the interface.
@@ -16,8 +12,7 @@ ClientUi which implements the view (Thymeleaf template). This feign client is th
 
 Prerequesite:
 
-PostgreSql: On the repository you can find an generation script of the database and a Dump
-If you want to set a database with some data: createdb p7 & psql p7 < Db_dump_p7.sql
+PostgreSql: On the repository you can find an generation script of the database and a Dump If you want to set a database with some data: createdb p7 & psql p7 < Db_dump_p7.sql
 
 If you want to set only database table: copy/paste DB_CREATE_p7 when running postgres with your own role.
 
