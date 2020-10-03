@@ -28,7 +28,7 @@
 
 				<h1 style="padding: 15px; text-align: center" th:text="${reservation.ouvrageDto.titre}"></h1>
 				<img th:src="${reservation.ouvrageDto.image}" class="card-img-top" src="" alt="" />
-				<div class="card-body"> <h4 class="card-title">Dates</h4>
+				<div class="card-body"> <h4 class="card-title">Informations reservation</h4>
 					<ul class="text-left" style="margin: 13px">
 						<li th:text="|Position dans la file d'attente : ${reservation.positionListe}|"></li>
 						<li th:text="|Date retour la plus proche: ${reservation.ouvrageDto.closerDate}|"></li>
@@ -46,7 +46,7 @@
 										<p>Votre reservation sera annuler et vous perdrez votre position dans la file d'attente</p>
 									</div>
 									<div class="modal-footer">
-										<a th:href="@{|/Reservations/{reservation.id}|}">Prolonger</a>
+										<a th:href="@{|/Reservations/{reservation.id}|}">Annuler</a>
 									</div>
 								</div>
 							</div>
