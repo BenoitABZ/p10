@@ -1,4 +1,3 @@
-
 package com.library.LibraryRestApi.controller;
 
 import java.time.LocalDate;
@@ -70,9 +69,11 @@ public class EmpruntController {
 
 			if (id == emprunteurId) {
 
-				if (today.compareTo(emprunt.getDateEmprunt().plusDays(56)) > 0) {
+				if (emprunt.getProlongation() == false && today.compareTo(emprunt.getDateEmprunt().plusDays(28)) > 0) {
 
 					emprunt.setProlongation(true);
+					
+					empruntDao.save(emprunt);
 
 				}
 
