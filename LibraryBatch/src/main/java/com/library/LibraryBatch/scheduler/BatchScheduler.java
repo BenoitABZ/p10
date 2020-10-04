@@ -1,4 +1,4 @@
-package com.library.LibraryBatch;
+package com.library.LibraryBatch.scheduler;
 
 import java.util.Date;
 

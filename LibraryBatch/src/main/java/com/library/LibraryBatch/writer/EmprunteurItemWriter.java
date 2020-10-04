@@ -1,4 +1,4 @@
-package com.library.LibraryBatch;
+package com.library.LibraryBatch.writer;
 
 import java.util.List;
 

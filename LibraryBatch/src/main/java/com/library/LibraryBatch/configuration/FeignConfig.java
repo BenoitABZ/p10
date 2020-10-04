@@ -1,7 +1,6 @@
-package com.library.LibraryBatch;
+package com.library.LibraryBatch.configuration;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import org.springframework.beans.BeansException;
@@ -55,9 +54,8 @@ public class FeignConfig {
 			List<MediaType> mediaTypes = new ArrayList<>();
 			mediaTypes.add(MediaType.valueOf(MediaType.TEXT_HTML_VALUE + ";charset=UTF-8"));
 			mediaTypes.add(MediaType.APPLICATION_JSON);
-			
+
 			setSupportedMediaTypes(mediaTypes);
 		}
 	}
-
 }

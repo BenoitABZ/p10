@@ -1,36 +1,24 @@
 package com.library.LibraryBatch.bean;
 
-
 import java.io.Serializable;
 
-
-import java.time.LocalDate;
-
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = EmpruntBean.class)
+public class EmpruntBean implements Serializable {
 
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope=EmpruntBean.class)
+	private static final long serialVersionUID = 1L;
 
-public class EmpruntBean implements Serializable{
-	
-	private static final long serialVersionUID = 1L; 
+	private int id;
 
-    private int id;
-    
- 
-    private String dateEmprunt;
-    
+	private String dateEmprunt;
 
-    private String dateRetour;
-    
-    
-    private Boolean prolongation;
- 
-    private ExemplaireBean exemplaire;
+	private String dateRetour;
+
+	private Boolean prolongation;
+
+	private ExemplaireBean exemplaire;
 
 	private EmprunteurBean emprunteur;
 
@@ -82,8 +70,4 @@ public class EmpruntBean implements Serializable{
 		this.emprunteur = emprunteur;
 	}
 
-
-    
-
 }
-

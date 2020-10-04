@@ -1,13 +1,15 @@
 package com.library.LibraryBatch.bean;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.library.LibraryBatch.bean.EmprunteurBean;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = EmprunteurBean.class)
-public class EmprunteurBean {
+public class EmprunteurBean implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	public int id;
 
