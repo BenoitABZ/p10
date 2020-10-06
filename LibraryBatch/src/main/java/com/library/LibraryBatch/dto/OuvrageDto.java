@@ -1,29 +1,30 @@
-package com.library.LibraryBatch.bean;
+package com.library.LibraryBatch.dto;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = OuvrageDto.class)
+public class OuvrageDto {
 
-public class OuvrageAuth {  
-	
 	private int id;
 
 	private String titre;
 
-    private String auteur;
-    
-    private String categorie;
+	private String auteur;
 
-    private String resume;
+	private String categorie;
+
+	private String resume;
 
 	private String anneeParution;
 
-    private Boolean disponibilite;
-   
-    private String image;
+	private Boolean disponibilite;
 
-    private int nombreExemplaires;
-    
-    
-    public int getId() {
+	private String image;
+
+	private int nombreExemplaires;
+
+	public int getId() {
 		return id;
 	}
 

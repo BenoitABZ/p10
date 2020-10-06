@@ -1,4 +1,4 @@
-package com.library.LibraryBatch;
+package com.library.LibraryBatch.configuration;
 
 import java.util.Properties;
 
@@ -13,14 +13,14 @@ public class EmailConfig {
 	@Bean
 	public JavaMailSender getJavaMailSender() {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-		
+
 		mailSender.setHost("smtp.gmail.com");
 		mailSender.setPort(465);
 		mailSender.setUsername("benoit.abouzeid@gmail.com");
 		mailSender.setPassword("ynjwegzevjtbervn");
 
 		Properties props = mailSender.getJavaMailProperties();
-		
+
 		props.put("mail.transport.protocol", "smtp");
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.debug", "true");

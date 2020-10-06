@@ -2,40 +2,23 @@ package com.library.LibraryBatch.bean;
 
 import java.io.Serializable;
 
-
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id",scope=ExemplaireBean.class)
-
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = ExemplaireBean.class)
 public class ExemplaireBean implements Serializable {
-	
-	private static final long serialVersionUID = 1L; 
-	
 
-    private Integer id;
- 
+	private static final long serialVersionUID = 1L;
 
+	private Integer id;
 
 	private String anneePublication;
-    
 
-    private String editeur;
-    
-    
-	
+	private String editeur;
+
 	private BibliothequeBean bibliotheque;
-	
-    
-	
+
 	private EmpruntBean emprunt;
-	
-    
 
 	private OuvrageBean ouvrage;
 
@@ -86,5 +69,5 @@ public class ExemplaireBean implements Serializable {
 	public void setOuvrage(OuvrageBean ouvrage) {
 		this.ouvrage = ouvrage;
 	}
-	
+
 }

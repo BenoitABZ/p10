@@ -1,10 +1,10 @@
-package com.library.LibraryBatch.bean;
+package com.library.LibraryBatch.dto;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = EmprunteurAuth.class)
-public class EmprunteurAuth {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = EmprunteurDto.class)
+public class EmprunteurDto {
 
 	private int id;
 

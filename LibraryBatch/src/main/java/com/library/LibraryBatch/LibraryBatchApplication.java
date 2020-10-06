@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class, SecurityAutoConfiguration.class })
 @EnableScheduling
-@EnableFeignClients("com.library.LibraryBatch")
+@EnableFeignClients("com.library.LibraryBatch.proxy")
 public class LibraryBatchApplication {
 
 	public static void main(String[] args) {

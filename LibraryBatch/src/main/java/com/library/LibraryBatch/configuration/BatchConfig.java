@@ -1,7 +1,6 @@
-package com.library.LibraryBatch;
+package com.library.LibraryBatch.configuration;
 
 import javax.mail.internet.MimeMessage;
-import javax.sql.DataSource;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -13,9 +12,12 @@ import org.springframework.batch.item.ItemReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import com.library.LibraryBatch.bean.EmprunteurBean;
+import com.library.LibraryBatch.processor.EmprunteurItemProcessor;
+import com.library.LibraryBatch.proxy.EmprunteurProxy;
+import com.library.LibraryBatch.reader.EmprunteurItemReader;
+import com.library.LibraryBatch.writer.EmprunteurItemWriter;
 
 @Configuration
 @EnableBatchProcessing
@@ -51,12 +53,14 @@ public class BatchConfig {
 
 	@Bean
 	public Step step1() {
-		return stepBuilderFactory.get("step1").<EmprunteurBean, MimeMessage>chunk(10).reader(read()).processor(processor()).writer(write()).build();
+		return stepBuilderFactory.get("step1").<EmprunteurBean, MimeMessage>chunk(10).reader(read())
+				.processor(processor()).writer(write()).build();
 	}
 
 	@Bean
 	public Job exportEmprunteurJob() {
-		return jobBuilderFactory.get("exportEmprunteurJob").incrementer(new RunIdIncrementer()).flow(step1()).end().build();
+		return jobBuilderFactory.get("exportEmprunteurJob").incrementer(new RunIdIncrementer()).flow(step1()).end()
+				.build();
 	}
 
 }
