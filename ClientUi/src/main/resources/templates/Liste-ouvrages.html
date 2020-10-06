@@ -47,7 +47,7 @@
 					<div th:unless="${ouvrage.disponibilite}">
 						<button class="btn btn-large btn-danger" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1"> Indisponible</button>
 						<div class="collapse" id="collapseExample1">
-							<div class="card card-body" th:text="|Cet ouvrage est indisponible - Date de retour: ${ouvrage.closerDate}|"></div>
+							<div class="card card-body" th:text="|Cet ouvrage est indisponible - Date de retour: ${ouvrage.closerDate} - Nombre de reservations: ${ouvrage.nombreReservations}|"></div>
 						</div>
 								<a href="#myModal" role="button" class="btn btn-warning" data-toggle="modal">Reserver</a>
 						<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
