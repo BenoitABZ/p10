@@ -149,7 +149,8 @@ public class ReservationController {
 
 			reservationDto.setAutorisation(false);
 
-			reservationDto.setMessage("La liste de réservation ne peut comporter qu’un maximum de personnes correspondant à 2x le nombre d’exemplaires de l’ouvrage");
+			reservationDto.setMessage(
+					"La liste de réservation ne peut comporter qu’un maximum de personnes correspondant à 2x le nombre d’exemplaires de l’ouvrage");
 
 			return reservationDto;
 

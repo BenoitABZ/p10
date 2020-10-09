@@ -5,13 +5,13 @@ import java.time.LocalDate;
 public class ReservationDto {
 
 	private int id;
-	
+
 	private OuvrageDto ouvrageDto;
-	
+
 	private EmprunteurDto emprunteurDto;
 
 	private LocalDate dateReservation;
-	
+
 	private int positionListe;
 
 	private boolean autorisation;
@@ -57,7 +57,7 @@ public class ReservationDto {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
+
 	public OuvrageDto getOuvrageDto() {
 		return ouvrageDto;
 	}

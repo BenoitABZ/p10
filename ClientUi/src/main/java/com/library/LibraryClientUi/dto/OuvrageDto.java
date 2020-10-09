@@ -25,7 +25,7 @@ public class OuvrageDto {
 	private LocalDate closerDate;
 
 	private int nombreReservations;
-	
+
 	private ReservationDto reservationDto;
 
 	public int getId() {
@@ -125,4 +125,3 @@ public class OuvrageDto {
 	}
 
 }
-

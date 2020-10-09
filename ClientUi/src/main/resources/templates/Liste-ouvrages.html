@@ -4,9 +4,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Liste des ouvrages</title>
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 
 <body style="background-color: #F0E0B5;">
@@ -17,12 +20,15 @@
 
 	<div th:if="${ouvrages.isEmpty()}">
 		<div class="row">
-			<H3 style="margin-left: 150px; margin-bottom: 300px; margin-top: 40px;">Aucun ouvrage ne correspond à vos critères de recherche!</H3>
+			<H3
+				style="margin-left: 150px; margin-bottom: 300px; margin-top: 40px;">Aucun
+				ouvrage ne correspond à vos critères de recherche!</H3>
 		</div>
 	</div>
 
 	<div th:each="ouvrage : ${ouvrages}">
-		<div class="card col-md-4 mx-auto mt-4 text-center" style="background-color: #F0E0B5; margin: 13px">
+		<div class="card col-md-4 mx-auto mt-4 text-center"
+			style="background-color: #F0E0B5; margin: 13px">
 
 			<div class="row">
 
@@ -38,37 +44,45 @@
 						<li th:text="|Resumé: ${ouvrage.resume}|"></li>
 					</ul>
 					<div th:if="${ouvrage.disponibilite}">
-						<button class="btn btn-large btn-success" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1"> Disponible</button>
+						<button class="btn btn-large btn-success" type="button"
+							data-toggle="collapse" data-target="#collapseExample1"
+							aria-expanded="false" aria-controls="collapseExample1">
+							Disponible</button>
 						<div class="collapse" id="collapseExample1">
 							<div class="card card-body"
 								th:text="|Cet ouvrage est disponible en ${ouvrage.nombreExemplaires} exemplaire(s)|"></div>
 						</div>
 					</div>
 					<div th:unless="${ouvrage.disponibilite}">
-						<button class="btn btn-large btn-danger" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1"> Indisponible</button>
+						<button class="btn btn-large btn-danger" type="button"
+							data-toggle="collapse" data-target="#collapseExample1"
+							aria-expanded="false" aria-controls="collapseExample1">
+							Indisponible</button>
 						<div class="collapse" id="collapseExample1">
-							<div class="card card-body" th:text="|Cet ouvrage est indisponible - Date de retour: ${ouvrage.closerDate} - Nombre de reservations: ${ouvrage.nombreReservations}|"></div>
+							<div class="card card-body"
+								th:text="|Cet ouvrage est indisponible - Date de retour: ${ouvrage.closerDate} - Nombre de reservations: ${ouvrage.nombreReservations}|"></div>
 						</div>
-								<a href="#myModal" role="button" class="btn btn-warning" data-toggle="modal">Reserver</a>
-						<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<a href="#myModal" role="button" class="btn btn-warning"
+							data-toggle="modal">Reserver</a>
+						<div id="myModal" class="modal fade" tabindex="-1" role="dialog"
+							aria-labelledby="myModalLabel" aria-hidden="true">
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
 										<h3 id="myModalLabel">Reservation</h3>
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-hidden="true">×</button>
 									</div>
 									<div th:if="${ouvrage.reservationDto.autorisation}">
 									    <div class="modal-body"									     
-										     th:text="|${ouvrage.reservationDto.message}|">
-									    </div>
+											th:text="|${ouvrage.reservationDto.message}|"></div>
 									    <div class="modal-footer">
 										  <a th:href="@{|/Reservations/${ouvrage.id}|}">Reserver</a>
 									    </div>
 									</div>
 										<div th:unless="${ouvrage.reservationDto.autorisation}">
 									    <div class="modal-body"									     
-										     th:text="|${ouvrage.reservationDto.message}|">
-									    </div>
+											th:text="|${ouvrage.reservationDto.message}|"></div>
 									</div>
 								</div>
 							</div>
@@ -82,9 +96,14 @@
 
 	<div th:replace="~{fragments/Footer :: footer}"></div>
 
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" type="text/javascript"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.3.3/umd/popper.min.js" type="text/javascript"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+		type="text/javascript"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		type="text/javascript"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.3.3/umd/popper.min.js"
+		type="text/javascript"></script>
 
 </body>
 </html>

@@ -4,14 +4,14 @@ import java.time.LocalDate;
 
 public class ReservationDto {
 
-private int id;
-	
+	private int id;
+
 	private OuvrageDto ouvrageDto;
-	
+
 	private EmprunteurDto emprunteurDto;
 
 	private LocalDate dateReservation;
-	
+
 	private int positionListe;
 
 	private boolean autorisation;
