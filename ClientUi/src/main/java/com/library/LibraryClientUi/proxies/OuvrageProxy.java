@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.library.LibraryClientUi.beans.OuvrageBean;
 import com.library.LibraryClientUi.beans.OuvrageAuth;
+import com.library.LibraryClientUi.beans.OuvrageBean;
 
 @FeignClient(name = "microservice-library", url = "localhost:8080")
 public interface OuvrageProxy {

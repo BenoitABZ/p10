@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
 <meta charset="UTF-8">
 <title>Connexion</title>
-
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
-
 </head>
+
 <body style="background-color: #F0E0B5;">
 
 	<div th:replace="~{fragments/Header :: header}"></div>
@@ -26,7 +23,7 @@
 				th:text="${emprunteurAuth.status}"></H4>
 		</div>
 	</div>
-	
+
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-3 col-md-3"></div>
@@ -34,15 +31,21 @@
 				<div class="card text-white bg-dark mx-auto" style="margin: 15px;">
 					<div class="card-body">
 						<h3 class="card-title">Connexion</h3>
-						<p class="card-text">Renseignez l'identifiant situé au dos de votre carte adhérent et le mot de passe reçu par courrier.</p>
-						<form name="f" class="my-auto d-inline w-50" th:action="@{/Connexion}" method="post" th:object="${emprunteurAuthParam}" action="">
+						<p class="card-text">Renseignez l'identifiant situé au dos de
+							votre carte adhérent et le mot de passe reçu par courrier.</p>
+						<form name="f" class="my-auto d-inline w-50"
+							th:action="@{/Connexion}" method="post"
+							th:object="${emprunteurAuthParam}" action="">
 							<div class="input-group">
-								<span class="input-group-btn"> 
-								    <label for="username">Identifiant</label>
-									<input type="text" id="identifiant" class="form-control" name="identifiant" /> 
-									<label for="password" style="margin-top: 10px">Mot de passe </label> 
-									<input type="password" id="motDePasse" class="form-control" name="motDePasse" />
-  								    <button class="btn btn-primary" style="background-color: brown; margin-top: 10px" type="submit">Connexion</button>
+								<span class="input-group-btn"> <label for="username">Identifiant</label>
+									<input type="text" id="identifiant" class="form-control"
+									name="identifiant" /> <label for="password"
+									style="margin-top: 10px">Mot de passe </label> <input
+									type="password" id="motDePasse" class="form-control"
+									name="motDePasse" />
+									<button class="btn btn-primary"
+										style="background-color: brown; margin-top: 10px"
+										type="submit">Connexion</button>
 								</span>
 							</div>
 						</form>

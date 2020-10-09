@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-
 <head>
 <meta charset="UTF-8">
 <title>Header</title>
 
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">  
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet"
+	href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
 </head>
 
@@ -17,58 +17,70 @@
 <body>
 
 
-    <header th:fragment="header">
-  
-        <div class="row bg-dark" >
-<div class = "col-xs-11 col-md-11" th:unless=${session.isEmpty()}><span th:text= "|Bienvenu ${session.emprunteur.prenom}!|" style="color:white; padding:8px; font-size:20px;" > </span></div>
-<div class = "col-xs-1 col-md-1">
-<ul class="nav nav-pills" th:switch=${session.isEmpty()}>
-    <li class="nav-item mx-auto" th:case="${true}">
-      <a th:text = "Connexion" class="nav-link active" style="background-color:brown" th:href="@{/Connexion}"></a>
-         
-    </li>
-    
-    <li class="nav-item mx-auto" th:case="${false}">       
-       <a th:text = "Deconnexion" th:href="@{/Deconnexion}" class="nav-link active" style="background-color:brown" ></a>
-    </li>    
-</ul>
-</div>
-</div>
-<div class="row" style="background-color:white; background-image:url('https://www.bnifrance.net/images/stucture/table_bni.jpg')">
+	<header th:fragment="header">
 
-   
-<div class = "col-xs-6 col-md-8" style= "margin-top:20px">
+		<div class="row bg-dark">
+			<div class="col-xs-11 col-md-11" th:unless="${session.isEmpty()}">
+				<span th:text="|Bienvenu ${session.emprunteur.prenom}!|"
+					style="color: white; padding: 8px; font-size: 20px;"> </span>
+			</div>
+			<div class="col-xs-1 col-md-1">
+				<ul class="nav nav-pills" th:switch="${session.isEmpty()}">
+					<li class="nav-item mx-auto" th:case="${true}"><a
+						th:text="Connexion" class="nav-link active"
+						style="background-color: brown" th:href="@{/Connexion}"></a></li>
 
-</div>
-<div class = "col-xs-6 col-md-4" >
-<div class="card text-white bg-dark" style = "margin-top:25px; margin-bottom:30px; margin-right:40px">
-    <div class="card-body">
-     <h3 class="card-title">Recherchez un ouvrage!</h3>
-        <p class="card-text">Recherche par mot clé (titre, auteur...)</p>
-        
+					<li class="nav-item mx-auto" th:case="${false}"><a
+						th:text="Deconnexion" th:href="@{/Deconnexion}"
+						class="nav-link active" style="background-color: brown"></a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="row"
+			style="background-color: white; background-image: url('https://www.bnifrance.net/images/stucture/table_bni.jpg')">
 
 
-        <form class="mx-2 my-auto d-inline w-100" th:action="@{/Search/Ouvrages}" method="post">
-            <div class="input-group">
-                <input type="text" id = "libelleCase" name="libelleCase" class="form-control" placeholder="titre, auteur...">
-                <span class="input-group-btn">
-                <button class="btn btn-primary" style="background-color:brown;" type="submit"><span class="fa fa-search"></span></button>
-              </span>
-            </div>
-        </form>
- 
-        
-    </div>
-</div>
-</div>
-</div>
+			<div class="col-xs-6 col-md-8" style="margin-top: 20px"></div>
+			<div class="col-xs-6 col-md-4">
+				<div class="card text-white bg-dark"
+					style="margin-top: 25px; margin-bottom: 30px; margin-right: 40px">
+					<div class="card-body">
+						<h3 class="card-title">Recherchez un ouvrage!</h3>
+						<p class="card-text">Recherche par mot clé (titre, auteur...)</p>
 
 
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.3.3/umd/popper.min.js"></script> 
 
-    </header>
-    
+						<form class="mx-2 my-auto d-inline w-100"
+							th:action="@{/Search/Ouvrages}" method="post" action="">
+							<div class="input-group">
+								<input type="text" id="libelleCase" name="libelleCase"
+									class="form-control" placeholder="titre, auteur..."> <span
+									class="input-group-btn">
+									<button class="btn btn-primary"
+										style="background-color: brown;" type="submit">
+										<span class="fa fa-search"></span>
+									</button>
+								</span>
+							</div>
+						</form>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+			type="text/javascript"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+			type="text/javascript"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.3.3/umd/popper.min.js"
+			type="text/javascript"></script>
+
+	</header>
+
 </body>
 </html>

@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.library.LibraryClientUi.beans.BibliothequeBean;
 
-@FeignClient(name="microservice-library", url="localhost:8080")
+@FeignClient(name = "microservice-library", url = "localhost:8080")
 public interface BibliothequeProxy {
-	
-	 @GetMapping(value = "/Bibliotheques")   
-	   public List<BibliothequeBean> getBibliotheques(); 
-	 
-	 @GetMapping(value = "/Bibliotheques/{bibliothequeId}")
-	   public BibliothequeBean getBibliotheque(@PathVariable("bibliothequeId") int bibliothequeId);
-	 
-	 @PostMapping(value = "/Bibliotheques")
-	   public void ajouterBibliotheque(@RequestBody BibliothequeBean bibliotheque);
-	 
-	 @DeleteMapping(value ="/Bibliotheques/{bibliothequeId}")
-	   public void supprimerBibliotheque(@PathVariable("bibliothequeId") int bibliothequeId);
+
+	@GetMapping(value = "/Bibliotheques")
+	public List<BibliothequeBean> getBibliotheques();
+
+	@GetMapping(value = "/Bibliotheques/{bibliothequeId}")
+	public BibliothequeBean getBibliotheque(@PathVariable("bibliothequeId") int bibliothequeId);
+
+	@PostMapping(value = "/Bibliotheques")
+	public void ajouterBibliotheque(@RequestBody BibliothequeBean bibliotheque);
+
+	@DeleteMapping(value = "/Bibliotheques/{bibliothequeId}")
+	public void supprimerBibliotheque(@PathVariable("bibliothequeId") int bibliothequeId);
 
 }

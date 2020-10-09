@@ -1,23 +1,18 @@
 package com.library.LibraryClientUi.beans;
 
-
-
-
 public class EmprunteurAuth {
 
-	
 	public int id;
-	
+
 	public String identifiant;
-	
+
 	public String motDePasse;
-	
+
 	public String status;
-	
+
 	public String nom;
-	
+
 	public String prenom;
-	
 
 	public int getId() {
 		return id;

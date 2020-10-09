@@ -1,11 +1,5 @@
 package com.library.LibraryClientUi.configuration;
 
-import org.springframework.context.annotation.Bean;
-
-import org.springframework.context.annotation.Configuration;
-
-import feign.auth.BasicAuthRequestInterceptor;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,12 +8,15 @@ import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.cloud.openfeign.support.ResponseEntityDecoder;
 import org.springframework.cloud.openfeign.support.SpringDecoder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import feign.auth.BasicAuthRequestInterceptor;
 import feign.codec.Decoder;
 
 @Configuration
@@ -57,7 +54,7 @@ public class FeignConfig {
 			List<MediaType> mediaTypes = new ArrayList<>();
 			mediaTypes.add(MediaType.valueOf(MediaType.TEXT_HTML_VALUE + ";charset=UTF-8"));
 			mediaTypes.add(MediaType.APPLICATION_JSON);
-			
+
 			setSupportedMediaTypes(mediaTypes);
 		}
 	}

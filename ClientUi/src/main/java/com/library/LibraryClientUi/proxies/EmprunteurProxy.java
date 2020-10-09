@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.library.LibraryClientUi.beans.EmprunteurBean;
 
-@FeignClient(name="microservice-library", url="localhost:8080")
+@FeignClient(name = "microservice-library", url = "localhost:8080")
 public interface EmprunteurProxy {
-	
-	@GetMapping(value = "/Emprunteurs")   
-	   public List<EmprunteurBean> getEmprunteurs();
-	
+
+	@GetMapping(value = "/Emprunteurs")
+	public List<EmprunteurBean> getEmprunteurs();
+
 	@GetMapping(value = "/Emprunteurs/{emprunteurId}")
-	   public EmprunteurBean getEmprunteur(@PathVariable("emprunteurId") int emprunteurId);
-	 
+	public EmprunteurBean getEmprunteur(@PathVariable("emprunteurId") int emprunteurId);
+
 	@PostMapping(value = "/Emprunteurs")
-	   public void ajouterEmprunteur(@RequestBody EmprunteurBean emprunteur);
-	 
-	@DeleteMapping(value ="/Emprunteurs/{emprunteurId}")
-	   public void supprimerEmprunteur(@PathVariable("emprunteurId") int emprunteurId);
+	public void ajouterEmprunteur(@RequestBody EmprunteurBean emprunteur);
+
+	@DeleteMapping(value = "/Emprunteurs/{emprunteurId}")
+	public void supprimerEmprunteur(@PathVariable("emprunteurId") int emprunteurId);
 
 }
