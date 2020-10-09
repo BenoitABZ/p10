@@ -72,7 +72,7 @@ public class EmpruntController {
 				if (emprunt.getProlongation() == false && today.compareTo(emprunt.getDateEmprunt().plusDays(28)) > 0) {
 
 					emprunt.setProlongation(true);
-					
+
 					empruntDao.save(emprunt);
 
 				}

@@ -1,7 +1,6 @@
 package com.library.LibraryRestApi.model;
 
 import java.io.Serializable;
-
 import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
