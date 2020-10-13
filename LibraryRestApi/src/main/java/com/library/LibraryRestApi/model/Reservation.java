@@ -2,6 +2,7 @@ package com.library.LibraryRestApi.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,6 +32,12 @@ public class Reservation implements Serializable {
 	@Column(name = "date_reservation")
 	private LocalDate dateReservation;
 
+	@Column(name = "date_notification")
+	private Date dateNotification;
+
+	@Column(name = "notification")
+	private boolean notification;
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_ouvrage")
 	private Ouvrage ouvrage;
@@ -53,6 +60,22 @@ public class Reservation implements Serializable {
 
 	public void setDateReservation(LocalDate dateReservation) {
 		this.dateReservation = dateReservation;
+	}
+
+	public Date getDateNotification() {
+		return dateNotification;
+	}
+
+	public void setDateNotification(Date dateNotification) {
+		this.dateNotification = dateNotification;
+	}
+
+	public boolean isNotification() {
+		return notification;
+	}
+
+	public void setNotification(boolean notification) {
+		this.notification = notification;
 	}
 
 	public Ouvrage getOuvrage() {

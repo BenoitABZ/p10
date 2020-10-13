@@ -69,7 +69,7 @@ public class ReservationController {
 
 				reservationDto.setOuvrageDto(ouvrageDto);
 
-				Set<Reservation> reservationsOuvrage = ouvrage.getReservations();
+				List<Reservation> reservationsOuvrage = ouvrage.getReservations();
 
 				for (Reservation reservationOuvrage : reservationsOuvrage) {
 

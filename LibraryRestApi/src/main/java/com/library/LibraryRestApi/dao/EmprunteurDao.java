@@ -1,6 +1,7 @@
 package com.library.LibraryRestApi.dao;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,9 +24,4 @@ public interface EmprunteurDao extends JpaRepository<Emprunteur, Integer> {
 
 	List<Emprunteur> findRetardataires();
 	
-	@Query("SELECT r " + "FROM Reservation r " + "JOIN Ouvrage o ON o.id=r.ouvrage.id  "
-			+ "WHERE o.disponibilite=true")
-
-	List<Emprunteur> findToNotifify();
-
 }

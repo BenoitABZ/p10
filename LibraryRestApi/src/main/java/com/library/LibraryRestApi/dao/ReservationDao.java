@@ -11,4 +11,5 @@ public interface ReservationDao extends JpaRepository<Reservation, Integer> {
 	List<Reservation> findAll();
 
 	Reservation findById(int id);
+
 }
