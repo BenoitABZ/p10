@@ -1,10 +1,10 @@
 package com.library.LibraryRestApi.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.library.LibraryRestApi.dao.EmprunteurDao;
 import com.library.LibraryRestApi.dao.OuvrageDao;
 import com.library.LibraryRestApi.dao.ReservationDao;
+import com.library.LibraryRestApi.model.Emprunt;
 import com.library.LibraryRestApi.model.Emprunteur;
-import com.library.LibraryRestApi.model.Exemplaire;
 import com.library.LibraryRestApi.model.Ouvrage;
 import com.library.LibraryRestApi.model.Reservation;
 
@@ -97,6 +97,56 @@ public class EmprunteurControlleur {
 		}
 
 		return emprunteursNotified;
+
+	}
+
+	@GetMapping(value = "/Emprunteurs/checkIfBorrowed")
+	public List<Emprunteur> checkIfBorrowed() {
+
+		List<Reservation> reservations = reservationDao.findToWarn();
+
+		List<Emprunteur> emprunteursWarned = new ArrayList<>();
+
+		for (Reservation reservation : reservations) {
+
+			Emprunteur emprunteur = reservation.getEmprunteur();
+
+			Set<Emprunt> emprunts = emprunteur.getEmprunts();
+
+			Date dateNotification = reservation.getDateNotification();
+
+			Calendar datePlus48 = Calendar.getInstance();
+
+			datePlus48.setTime(dateNotification);
+
+			datePlus48.add(Calendar.HOUR_OF_DAY, 48);
+
+			boolean borrowed = false;
+
+			if (datePlus48.getTime().after(new Date()) && !emprunts.isEmpty()) {
+
+				for (Emprunt emprunt : emprunts) {
+
+					if (emprunt.getExemplaire().getOuvrage().getTitre().equals(reservation.getOuvrage().getTitre())) {
+
+						borrowed = true;
+
+						break;
+					}
+				}
+
+				if (borrowed == false) {
+
+					emprunteursWarned.add(emprunteur);
+
+				}
+			}
+
+			reservationDao.delete(reservation);
+
+		}
+
+		return emprunteursWarned;
 
 	}
 
