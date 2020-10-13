@@ -22,5 +22,10 @@ public interface EmprunteurDao extends JpaRepository<Emprunteur, Integer> {
 			+ "WHERE current_date > e.dateRetour")
 
 	List<Emprunteur> findRetardataires();
+	
+	@Query("SELECT r " + "FROM Reservation r " + "JOIN Ouvrage o ON o.id=r.ouvrage.id  "
+			+ "WHERE o.disponibilite=true")
+
+	List<Emprunteur> findToNotifify();
 
 }
