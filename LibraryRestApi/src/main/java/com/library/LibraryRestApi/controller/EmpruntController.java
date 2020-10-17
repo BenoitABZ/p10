@@ -18,10 +18,12 @@ import com.library.LibraryRestApi.dao.EmpruntDao;
 import com.library.LibraryRestApi.dao.EmprunteurDao;
 import com.library.LibraryRestApi.dao.ExemplaireDao;
 import com.library.LibraryRestApi.dao.OuvrageDao;
+import com.library.LibraryRestApi.dao.ReservationDao;
 import com.library.LibraryRestApi.model.Emprunt;
 import com.library.LibraryRestApi.model.Emprunteur;
 import com.library.LibraryRestApi.model.Exemplaire;
 import com.library.LibraryRestApi.model.Ouvrage;
+import com.library.LibraryRestApi.model.Reservation;
 
 @RestController
 public class EmpruntController {
@@ -37,6 +39,9 @@ public class EmpruntController {
 
 	@Autowired
 	OuvrageDao ouvrageDao;
+
+	@Autowired
+	ReservationDao reservationDao;
 
 	@GetMapping(value = "/Emprunts")
 	public List<Emprunt> getEmprunts() {
@@ -112,11 +117,26 @@ public class EmpruntController {
 				if (exemplaireBuff.getEmprunt() == null) {
 
 					exemplairesBuff.add(exemplaireBuff);
+
 				}
 			}
 
 			if (exemplairesBuff.size() == 1)
+
 				ouvrage.setDisponibilite(false);
+
+			Set<Reservation> reservations = emprunteur.getReservations();
+
+			for (Reservation reservation : reservations) {
+
+				if (reservation.getOuvrage().getTitre().equals(ouvrage.getTitre())) {
+
+					reservationDao.delete(reservation);
+
+					break;
+
+				}
+			}
 
 			LocalDate dateEmprunt = LocalDate.now();
 
