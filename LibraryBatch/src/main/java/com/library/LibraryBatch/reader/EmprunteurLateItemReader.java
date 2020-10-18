@@ -8,7 +8,7 @@ import org.springframework.batch.item.support.ListItemReader;
 import com.library.LibraryBatch.bean.EmprunteurBean;
 import com.library.LibraryBatch.proxy.EmprunteurProxy;
 
-public class EmprunteurItemReader {
+public class EmprunteurLateItemReader {
 
 	public ItemReader<EmprunteurBean> read(EmprunteurProxy emprunteurProxy) {
 

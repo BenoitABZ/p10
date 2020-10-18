@@ -1,5 +1,7 @@
 package com.library.LibraryBatch.processor;
 
+import java.util.Set;
+
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.batch.item.ItemProcessor;
@@ -8,8 +10,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
 import com.library.LibraryBatch.bean.EmprunteurBean;
+import com.library.LibraryBatch.bean.ReservationBean;
 
-public class EmprunteurItemProcessor implements ItemProcessor<EmprunteurBean, MimeMessage> {
+public class EmprunteurNotifyItemProcessor implements ItemProcessor<EmprunteurBean, MimeMessage> {
 
 	@Autowired
 	private JavaMailSender mailSender;
@@ -24,8 +27,22 @@ public class EmprunteurItemProcessor implements ItemProcessor<EmprunteurBean, Mi
 		helper.setFrom("benoit.abouzeid@gmail.com");
 		helper.setTo(emprunteurBean.getMail());
 
-		message.setContent("bonjour, vous avez du retard sur certains ouvrages empruntés sur notre réseau",
-				"text/plain");
+		Set<ReservationBean> reservations = emprunteurBean.getReservations();
+
+		for (ReservationBean reservation : reservations) {
+
+			if (reservation.isNotification()) {
+
+				message.setContent(
+						"bonjour, l'ouvrage " + reservation.getOuvrage()
+								+ " est maintenant disponible. Vous avez 48 heures pour proceder à son emprunt",
+						"text/plain");
+
+				break;
+			}
+		}
+		
+		System.out.println(message);
 
 		return message;
 	}

@@ -1,6 +1,7 @@
 package com.library.LibraryBatch.bean;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -28,6 +29,8 @@ public class OuvrageBean implements Serializable {
 	private String image;
 
 	private Set<ExemplaireBean> exemplaires;
+
+	private List<ReservationBean> reservations;
 
 	public Integer getId() {
 		return id;
@@ -99,6 +102,14 @@ public class OuvrageBean implements Serializable {
 
 	public void setExemplaires(Set<ExemplaireBean> exemplaires) {
 		this.exemplaires = exemplaires;
+	}
+
+	public List<ReservationBean> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(List<ReservationBean> reservations) {
+		this.reservations = reservations;
 	}
 
 }

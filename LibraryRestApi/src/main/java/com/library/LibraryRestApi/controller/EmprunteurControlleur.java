@@ -80,7 +80,7 @@ public class EmprunteurControlleur {
 					Date date = new Date();
 
 					reservation.setDateNotification(date);
-
+					
 					reservationDao.save(reservation);
 
 					Emprunteur emprunteur = reservation.getEmprunteur();

@@ -31,6 +31,8 @@ public class EmprunteurBean implements Serializable {
 
 	public Set<EmpruntBean> emprunts;
 
+	private Set<ReservationBean> reservations;
+
 	public int getId() {
 		return id;
 	}
@@ -109,6 +111,14 @@ public class EmprunteurBean implements Serializable {
 
 	public void setEmprunts(Set<EmpruntBean> emprunts) {
 		this.emprunts = emprunts;
+	}
+
+	public Set<ReservationBean> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(Set<ReservationBean> reservations) {
+		this.reservations = reservations;
 	}
 
 }
