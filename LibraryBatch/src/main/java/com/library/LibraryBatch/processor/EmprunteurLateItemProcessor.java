@@ -21,12 +21,19 @@ public class EmprunteurLateItemProcessor implements ItemProcessor<EmprunteurBean
 
 		MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-		helper.setFrom("benoit.abouzeid@gmail.com");
-		helper.setTo(emprunteurBean.getMail());
+		try {
+
+			helper.setFrom("benoit.abouzeid@gmail.com");
+			helper.setTo(emprunteurBean.getMail());
+
+		} catch (NullPointerException e) {
+
+			System.out.println("problème1");
+		}
 
 		message.setContent("bonjour, vous avez du retard sur certains ouvrages empruntés sur notre réseau",
 				"text/plain");
-		
+
 		System.out.println(message);
 
 		return message;

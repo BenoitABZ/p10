@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -46,29 +45,37 @@ public class ReservationClientController {
 			}
 		}
 
-		return "redirect:/Search/Reservations";
+		return "redirect:/Liste-reservations";
 	}
 
-	@GetMapping(value = "/Search/Reservations")
+	@GetMapping(value = "/Liste-reservations")
 	public String getReservationsEmprunteur(Model model, HttpServletRequest req) {
 
 		HttpSession session = req.getSession();
 
-		EmprunteurDto emprunteurDto = (EmprunteurDto) session.getAttribute("emprunteur");
+		if (session.getAttribute("emprunteur") != null) {
 
-		List<ReservationDto> reservationsDto = reservationProxy.getReservationsEmprunteur(emprunteurDto.getId());
+			EmprunteurDto emprunteurDto = (EmprunteurDto) session.getAttribute("emprunteur");
 
-		model.addAttribute("reservations", reservationsDto);
+			List<ReservationDto> reservationsDto = reservationProxy.getReservationsEmprunteur(emprunteurDto.getId());
 
-		return "Liste-reservations";
+			model.addAttribute("reservations", reservationsDto);
+
+			return "Liste-reservations";
+
+		} else {
+
+			return "Connexion";
+		}
+
 	}
 
-	@DeleteMapping(value = "/Reservations/{reservationId}")
+	@GetMapping(value = "/Reservations/supprimer/{reservationId}")
 	public String supprimerReservation(@PathVariable("reservationId") int reservationId) {
 
 		reservationProxy.supprimerReservation(reservationId);
 
-		return "redirect:/Search/Reservations";
+		return "redirect:/Liste-reservations";
 
 	}
 }

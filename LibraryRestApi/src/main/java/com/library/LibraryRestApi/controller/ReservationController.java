@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +19,7 @@ import com.library.LibraryRestApi.dto.OuvrageDto;
 import com.library.LibraryRestApi.dto.ReservationDto;
 import com.library.LibraryRestApi.model.Emprunt;
 import com.library.LibraryRestApi.model.Emprunteur;
+import com.library.LibraryRestApi.model.Exemplaire;
 import com.library.LibraryRestApi.model.Ouvrage;
 import com.library.LibraryRestApi.model.Reservation;
 
@@ -35,7 +35,7 @@ public class ReservationController {
 	@Autowired
 	EmprunteurDao emprunteurDao;
 
-	@GetMapping(value = "/Search/Reservations/{emprunteurId}")
+	@GetMapping(value = "/Search/Reservations/Emprunteur/{emprunteurId}")
 	public List<ReservationDto> getReservationsEmprunteur(@PathVariable("emprunteurId") int emprunteurId) {
 
 		List<Reservation> reservations = reservationDao.findAll();
@@ -67,13 +67,36 @@ public class ReservationController {
 				ouvrageDto.setImage(ouvrage.getImage());
 				ouvrageDto.setDisponibilite(ouvrage.getDisponibilite());
 
+				Set<Exemplaire> exemplaires = ouvrage.getExemplaires();
+
+				for (Exemplaire exemplaireBoucle1 : exemplaires) {
+
+					LocalDate dateBoucle1 = exemplaireBoucle1.getEmprunt().getDateRetour();
+
+					ouvrageDto.setCloserDate(dateBoucle1);
+
+					for (Exemplaire exemplaireBoucle2 : exemplaires) {
+
+						LocalDate dateBoucle2 = exemplaireBoucle2.getEmprunt().getDateRetour();
+
+						if (dateBoucle1.isAfter(dateBoucle2)) {
+
+							ouvrageDto.setCloserDate(null);
+
+							break;
+						}
+
+					}
+
+				}
+
 				reservationDto.setOuvrageDto(ouvrageDto);
 
 				List<Reservation> reservationsOuvrage = ouvrage.getReservations();
 
 				for (Reservation reservationOuvrage : reservationsOuvrage) {
 
-					int count = 1;
+					int count = 0;
 
 					count++;
 
@@ -92,7 +115,7 @@ public class ReservationController {
 		return reservationsBuff;
 	}
 
-	@GetMapping(value = "/Search/Reservations/{ouvrageId}")
+	@GetMapping(value = "/Search/Reservations/Ouvrage/{ouvrageId}")
 	public List<Reservation> getReservationsOuvrage(@PathVariable("ouvrageId") int ouvrageId) {
 
 		List<Reservation> reservations = reservationDao.findAll();
@@ -149,12 +172,27 @@ public class ReservationController {
 
 			reservationDto.setAutorisation(false);
 
-			reservationDto.setMessage(
-					"La liste de réservation ne peut comporter qu’un maximum de personnes correspondant à 2x le nombre d’exemplaires de l’ouvrage");
+			reservationDto.setMessage("La liste de réservation ne peut comporter qu’un maximum de personnes correspondant à 2x le nombre d’exemplaires de l’ouvrage");
 
 			return reservationDto;
 
 		}
+		
+		Set<Reservation> reservations = emprunteur.getReservations();
+		
+		for (Reservation reservation : reservations) {
+			
+			if (reservation.getOuvrage().getTitre().equals(reservationDto.getOuvrageDto().getTitre())) {
+				
+				reservationDto.setAutorisation(false);
+				
+				reservationDto.setMessage( "Vous ne pouvez reserver plus de 2x le meme ouvrage");
+				
+				return reservationDto;
+				
+			}
+		}
+		
 		reservationDto.setAutorisation(true);
 
 		reservationDto.setDateReservation(LocalDate.now());
@@ -197,7 +235,7 @@ public class ReservationController {
 
 	}
 
-	@DeleteMapping(value = "/Reservationss/{reservationId}")
+	@GetMapping(value = "/Reservations/supprimer/{reservationId}")
 	public void supprimerReservation(@PathVariable("reservationId") int reservationId) {
 
 		reservationDao.deleteById(reservationId);

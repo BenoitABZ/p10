@@ -130,36 +130,48 @@ public class OuvrageController {
 
 				ouvrageDto.setNombreExemplaires(nombreExemplaires);
 
-				int nombreReservations = ouvrage.getReservations().size();
+				try {
 
-				ouvrageDto.setNombreReservations(nombreReservations);
+					int nombreReservations = ouvrage.getReservations().size();
 
-				Set<Exemplaire> exemplaires = ouvrage.getExemplaires();
+					ouvrageDto.setNombreReservations(nombreReservations);
 
-				for (Exemplaire exemplaireBoucle1 : exemplaires) {
+				} catch (NullPointerException e) {
 
-					LocalDate dateBoucle1 = exemplaireBoucle1.getEmprunt().getDateRetour();
+					ouvrageDto.setNombreReservations(0);
 
-					ouvrageDto.setCloserDate(dateBoucle1);
+				}
+				
+				if (ouvrage.getDisponibilite() == false) {
+					
+					Set<Exemplaire> exemplaires = ouvrage.getExemplaires();
 
-					for (Exemplaire exemplaireBoucle2 : exemplaires) {
+					for (Exemplaire exemplaireBoucle1 : exemplaires) {
 
-						LocalDate dateBoucle2 = exemplaireBoucle2.getEmprunt().getDateRetour();
+						LocalDate dateBoucle1 = exemplaireBoucle1.getEmprunt().getDateRetour();
 
-						if (dateBoucle1.isAfter(dateBoucle2)) {
+						ouvrageDto.setCloserDate(dateBoucle1);
 
-							ouvrageDto.setCloserDate(null);
+						for (Exemplaire exemplaireBoucle2 : exemplaires) {
 
-							break;
+							LocalDate dateBoucle2 = exemplaireBoucle2.getEmprunt().getDateRetour();
+
+							if (dateBoucle1.isAfter(dateBoucle2)) {
+
+								ouvrageDto.setCloserDate(null);
+
+								break;
+							}
+
 						}
 
 					}
 
 				}
-
+				
 				ouvragesBuff.add(ouvrageDto);
-
 			}
+			
 		}
 
 		return ouvragesBuff;

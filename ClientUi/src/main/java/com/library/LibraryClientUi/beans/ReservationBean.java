@@ -3,6 +3,7 @@ package com.library.LibraryClientUi.beans;
 import java.io.Serializable;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -15,6 +16,10 @@ public class ReservationBean implements Serializable {
 	private Integer id;
 
 	private LocalDate dateReservation;
+	
+	private Date dateNotification;
+	
+	private boolean notification;
 
 	private OuvrageBean ouvrage;
 
@@ -50,6 +55,22 @@ public class ReservationBean implements Serializable {
 
 	public void setEmprunteur(EmprunteurBean emprunteur) {
 		this.emprunteur = emprunteur;
+	}
+
+	public Date getDateNotification() {
+		return dateNotification;
+	}
+
+	public void setDateNotification(Date dateNotification) {
+		this.dateNotification = dateNotification;
+	}
+
+	public boolean isNotification() {
+		return notification;
+	}
+
+	public void setNotification(boolean notification) {
+		this.notification = notification;
 	}
 
 }

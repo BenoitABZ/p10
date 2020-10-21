@@ -3,7 +3,6 @@ package com.library.LibraryClientUi.proxies;
 import java.util.List;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,10 +14,10 @@ import com.library.LibraryClientUi.dto.ReservationDto;
 @FeignClient(name = "microservice-library", url = "localhost:8080")
 public interface ReservationProxy {
 
-	@GetMapping(value = "/Search/Reservations/{emprunteurId}")
+	@GetMapping(value = "/Search/Reservations/Emprunteur/{emprunteurId}")
 	public List<ReservationDto> getReservationsEmprunteur(@PathVariable("emprunteurId") int emprunteurId);
 
-	@GetMapping(value = "/Search/Reservations/{ouvrageId}")
+	@GetMapping(value = "/Search/Reservations/Ouvrage/{ouvrageId}")
 	public List<ReservationBean> getReservationsOuvrage(@PathVariable("ouvrageId") int ouvrageId);
 
 	@PostMapping(value = "/Reservations/CheckReservation")
@@ -27,7 +26,7 @@ public interface ReservationProxy {
 	@PostMapping(value = "/Reservations")
 	public ReservationDto ajouterReservation(@RequestBody ReservationDto reservationDto);
 
-	@DeleteMapping(value = "/Reservations/{reservationId}")
+	@GetMapping(value = "/Reservations/supprimer/{reservationId}")
 	public void supprimerReservation(@PathVariable("reservationId") int reservationId);
 
 }

@@ -43,10 +43,6 @@ public class EmprunteurControlleur {
 
 		List<Emprunteur> emprunteurs = emprunteurDao.findRetardataires();
 
-		Emprunteur emprunteur = emprunteurs.get(0);
-
-		System.out.println(emprunteur.getNom());
-
 		return emprunteurs;
 	}
 
@@ -71,16 +67,16 @@ public class EmprunteurControlleur {
 
 			for (Reservation reservation : reservationsOuvrage) {
 
-				count--;
-
 				if (count > 0) {
+					
+					count--;
 
 					reservation.setNotification(true);
 
 					Date date = new Date();
 
 					reservation.setDateNotification(date);
-					
+
 					reservationDao.save(reservation);
 
 					Emprunteur emprunteur = reservation.getEmprunteur();
@@ -117,7 +113,7 @@ public class EmprunteurControlleur {
 
 			datePlus48.add(Calendar.HOUR_OF_DAY, 48);
 
-			if (datePlus48.getTime().after(new Date())) {
+			if (datePlus48.getTime().before(new Date())) {
 
 				emprunteursWarned.add(emprunteur);
 

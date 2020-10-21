@@ -67,7 +67,17 @@ public class OuvrageClientController {
 
 				ouvragesWithReservationCheck.add(ouvrageDto);
 
-				req.setAttribute("reservationsDtoSession", reservationsDtoSession);
+				req.getSession().setAttribute("reservationsDtoSession", reservationsDtoSession);
+			}else {
+				
+				reservationDto.setAutorisation(false);
+				
+				reservationDto.setMessage("Vous devez etre inscrit pour reserver");
+				
+				ouvrageDto.setReservationDto(reservationDto);
+				
+				ouvragesWithReservationCheck.add(ouvrageDto);
+				
 			}
 		}
 

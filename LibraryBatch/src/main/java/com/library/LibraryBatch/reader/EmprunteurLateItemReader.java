@@ -14,8 +14,8 @@ public class EmprunteurLateItemReader {
 
 		List<EmprunteurBean> emprunteursList = emprunteurProxy.getEmprunteursRetardataires();
 
-		ListItemReader<EmprunteurBean> emprunteurs = new ListItemReader<EmprunteurBean>(emprunteursList);
-
+		ListItemReader<EmprunteurBean> emprunteurs = new ListItemReader<EmprunteurBean>(emprunteursList);		
+		
 		return emprunteurs;
 	}
 }

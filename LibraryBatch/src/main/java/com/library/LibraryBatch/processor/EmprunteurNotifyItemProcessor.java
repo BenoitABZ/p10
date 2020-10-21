@@ -24,25 +24,32 @@ public class EmprunteurNotifyItemProcessor implements ItemProcessor<EmprunteurBe
 
 		MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-		helper.setFrom("benoit.abouzeid@gmail.com");
-		helper.setTo(emprunteurBean.getMail());
+		try {
 
-		Set<ReservationBean> reservations = emprunteurBean.getReservations();
+			helper.setFrom("benoit.abouzeid@gmail.com");
+			helper.setTo(emprunteurBean.getMail());
 
-		for (ReservationBean reservation : reservations) {
+			Set<ReservationBean> reservations = emprunteurBean.getReservations();
 
-			if (reservation.isNotification()) {
+			for (ReservationBean reservation : reservations) {
 
-				message.setContent(
-						"bonjour, l'ouvrage " + reservation.getOuvrage()
-								+ " est maintenant disponible. Vous avez 48 heures pour proceder à son emprunt",
-						"text/plain");
+				if (reservation.isNotification()) {
 
-				break;
+					message.setContent(
+							"bonjour, l'ouvrage " + reservation.getOuvrage()
+									+ " est maintenant disponible. Vous avez 48 heures pour proceder à son emprunt: " + emprunteurBean.getMail(),
+							"text/plain");
+
+					break;
+				}
 			}
+
+		} catch (NullPointerException e) {
+
+			System.out.println("problème2");
 		}
-		
-		System.out.println(message);
+
+		//System.out.println(message);
 
 		return message;
 	}

@@ -100,19 +100,19 @@ public class BatchConfig {
 				.processor(processorWarn()).writer(write()).build();
 	}
 
-	@Bean("lateJob")
+	@Bean(name="jobLate")
 	public Job getLateJob() {
 		return jobBuilderFactory.get("getLateJob").incrementer(new RunIdIncrementer()).flow(getLateStep()).end()
 				.build();
 	}
 	
-	@Bean("notifyJob")
+	@Bean(name="jobNotify")
 	public Job getNotifyJob() {
 		return jobBuilderFactory.get("getNotifyJob").incrementer(new RunIdIncrementer()).flow(getNotifyStep()).end()
 				.build();
 	}
 	
-	@Bean("warnJob")
+	@Bean(name="jobWarn")
 	public Job getWarnJob() {
 		return jobBuilderFactory.get("getWarnJob").incrementer(new RunIdIncrementer()).flow(getWarnStep()).end()
 				.build();
