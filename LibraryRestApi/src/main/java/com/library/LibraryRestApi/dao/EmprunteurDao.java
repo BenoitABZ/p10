@@ -1,6 +1,7 @@
 package com.library.LibraryRestApi.dao;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -22,5 +23,5 @@ public interface EmprunteurDao extends JpaRepository<Emprunteur, Integer> {
 			+ "WHERE current_date > e.dateRetour")
 
 	List<Emprunteur> findRetardataires();
-
+	
 }

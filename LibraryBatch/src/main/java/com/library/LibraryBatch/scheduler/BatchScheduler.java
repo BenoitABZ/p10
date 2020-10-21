@@ -21,7 +21,13 @@ import lombok.AllArgsConstructor;
 public class BatchScheduler {
 
 	@Autowired
-	Job job;
+	Job jobLate;
+
+	@Autowired
+	Job jobNotify;
+
+	@Autowired
+	Job jobWarn;
 
 	@Autowired
 	JobLauncher jobLauncher;
@@ -31,15 +37,56 @@ public class BatchScheduler {
 	// fixedRate = 60000
 
 	@Scheduled(fixedRate = 60000)
-	public void schedule() throws JobParametersInvalidException, JobExecutionAlreadyRunningException,
+	public void scheduleLate() throws JobParametersInvalidException, JobExecutionAlreadyRunningException,
 			JobRestartException, JobInstanceAlreadyCompleteException {
 		Date date = new Date();
 		try {
-			jobLauncher.run(job, new JobParametersBuilder().addDate("date", date).toJobParameters());
+			jobLauncher.run(jobLate, new JobParametersBuilder().addDate("date", date).toJobParameters());
 
-			System.out.println("bonjour, vous avez du retard sur certains ouvrages empruntés sur notre réseau");
+			System.out.println("Bonjour, vous avez du retard sur certains ouvrages empruntés sur notre réseau JOBLATE");
+
 		} catch (org.springframework.batch.core.repository.JobRestartException e) {
-			// TODO Auto-generated catch block
+
+			e.printStackTrace();
+		}
+
+	}
+	
+	//cron="0 0 9-17 * * MON-FRI"
+	
+	 //fixedRate = 70000
+	
+	@Scheduled(cron="0 0 0 * * MON-FRI" )  
+	public void scheduleNotify() throws JobParametersInvalidException, JobExecutionAlreadyRunningException,
+			JobRestartException, JobInstanceAlreadyCompleteException {
+		Date date = new Date();
+		try {
+			jobLauncher.run(jobNotify, new JobParametersBuilder().addDate("date", date).toJobParameters());
+
+			System.out.println("Bonjour, un ouvrage que vous avez réservé est disponible JOBNOTIFY");
+
+		} catch (org.springframework.batch.core.repository.JobRestartException e) {
+
+			e.printStackTrace();
+		}
+
+	}
+	
+	//cron="0 0 1 * * MON-FRI"
+
+    //fixedRate = 65000
+	
+	@Scheduled(cron="1 0 0 * * MON-FRI")  
+	public void scheduleWarn() throws JobParametersInvalidException, JobExecutionAlreadyRunningException,
+			JobRestartException, JobInstanceAlreadyCompleteException {
+		Date date = new Date();
+		try {
+			jobLauncher.run(jobWarn, new JobParametersBuilder().addDate("date", date).toJobParameters());
+
+			System.out.println("Bonjour, le délai de 48 heures est dépassé, votre réservation a été supprimé JOBWARN");
+
+		} catch (org.springframework.batch.core.repository.JobRestartException e) {
+
 			e.printStackTrace();
 		}
 

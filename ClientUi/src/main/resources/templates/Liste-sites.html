@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 <meta charset="UTF-8">
 <title>Liste des sites</title>
@@ -12,14 +13,18 @@
 </head>
 
 <body style="background-color: #F0E0B5;">
+
 	<div th:replace="~{fragments/Header :: header}"></div>
 
 	<div th:replace="~{fragments/Nav :: nav}"></div>
 
 	<div th:each="bibliotheque : ${bibliotheques}"
 		class="col-md-6 mx-auto mt-5 text-center">
+	
 		<div class="card" style="margin: 13px; background-color: #F0E0B5;">
+
 			<div class="row">
+
 				<h1 style="padding: 15px; text-align: center"
 					th:text="${bibliotheque.nom}"></h1>
 				<img th:src="${bibliotheque.image}" class="card-img-top" src=""

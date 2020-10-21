@@ -1,5 +1,10 @@
 package com.library.LibraryRestApi.controller;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +17,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.library.LibraryRestApi.dao.EmprunteurDao;
+import com.library.LibraryRestApi.dao.OuvrageDao;
+import com.library.LibraryRestApi.dao.ReservationDao;
 import com.library.LibraryRestApi.model.Emprunteur;
+import com.library.LibraryRestApi.model.Ouvrage;
+import com.library.LibraryRestApi.model.Reservation;
 
 @RestController
 public class EmprunteurControlleur {
 
 	@Autowired
-	public EmprunteurDao emprunteurDao;
+	EmprunteurDao emprunteurDao;
+
+	@Autowired
+	OuvrageDao ouvrageDao;
+
+	@Autowired
+	ReservationDao reservationDao;
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
@@ -28,11 +43,87 @@ public class EmprunteurControlleur {
 
 		List<Emprunteur> emprunteurs = emprunteurDao.findRetardataires();
 
-		Emprunteur emprunteur = emprunteurs.get(0);
-
-		System.out.println(emprunteur.getNom());
-
 		return emprunteurs;
+	}
+
+	@GetMapping(value = "/Emprunteurs/notifyEmprunteur")
+	public List<Emprunteur> notifyEmprunteur() {
+
+		List<Ouvrage> ouvrages = ouvrageDao.findToNotify();
+
+		List<Emprunteur> emprunteursNotified = new ArrayList<>();
+
+		for (Ouvrage ouvrage : ouvrages) {
+
+			int count = ouvrage.getExemplaires().size();
+
+			List<Reservation> reservationsOuvrage = ouvrage.getReservations();
+
+			Collections.sort(reservationsOuvrage, new Comparator<Reservation>() {
+				public int compare(Reservation r1, Reservation r2) {
+					return (r2.getDateReservation()).compareTo(r1.getDateReservation());
+				}
+			});
+
+			for (Reservation reservation : reservationsOuvrage) {
+
+				if (count > 0) {
+					
+					count--;
+
+					reservation.setNotification(true);
+
+					Date date = new Date();
+
+					reservation.setDateNotification(date);
+
+					reservationDao.save(reservation);
+
+					Emprunteur emprunteur = reservation.getEmprunteur();
+
+					emprunteursNotified.add(emprunteur);
+
+				} else {
+
+					break;
+				}
+			}
+		}
+
+		return emprunteursNotified;
+
+	}
+
+	@GetMapping(value = "/Emprunteurs/checkIfBorrowed")
+	public List<Emprunteur> checkIfBorrowed() {
+
+		List<Reservation> reservations = reservationDao.findToWarn();
+
+		List<Emprunteur> emprunteursWarned = new ArrayList<>();
+
+		for (Reservation reservation : reservations) {
+
+			Emprunteur emprunteur = reservation.getEmprunteur();
+
+			Date dateNotification = reservation.getDateNotification();
+
+			Calendar datePlus48 = Calendar.getInstance();
+
+			datePlus48.setTime(dateNotification);
+
+			datePlus48.add(Calendar.HOUR_OF_DAY, 48);
+
+			if (datePlus48.getTime().before(new Date())) {
+
+				emprunteursWarned.add(emprunteur);
+
+				reservationDao.delete(reservation);
+
+			}
+		}
+
+		return emprunteursWarned;
+
 	}
 
 	@GetMapping(value = "/Emprunteurs")

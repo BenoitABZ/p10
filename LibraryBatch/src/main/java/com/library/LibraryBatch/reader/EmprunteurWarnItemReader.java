@@ -8,14 +8,15 @@ import org.springframework.batch.item.support.ListItemReader;
 import com.library.LibraryBatch.bean.EmprunteurBean;
 import com.library.LibraryBatch.proxy.EmprunteurProxy;
 
-public class EmprunteurItemReader {
+public class EmprunteurWarnItemReader {
 
 	public ItemReader<EmprunteurBean> read(EmprunteurProxy emprunteurProxy) {
 
-		List<EmprunteurBean> emprunteursList = emprunteurProxy.getEmprunteursRetardataires();
+		List<EmprunteurBean> emprunteursList = emprunteurProxy.checkIfBorrowed();
 
 		ListItemReader<EmprunteurBean> emprunteurs = new ListItemReader<EmprunteurBean>(emprunteursList);
 
 		return emprunteurs;
 	}
+
 }

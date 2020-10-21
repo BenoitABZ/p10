@@ -14,9 +14,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.library.LibraryBatch.bean.EmprunteurBean;
-import com.library.LibraryBatch.processor.EmprunteurItemProcessor;
+import com.library.LibraryBatch.processor.EmprunteurLateItemProcessor;
+import com.library.LibraryBatch.processor.EmprunteurNotifyItemProcessor;
+import com.library.LibraryBatch.processor.EmprunteurWarnItemProcessor;
 import com.library.LibraryBatch.proxy.EmprunteurProxy;
-import com.library.LibraryBatch.reader.EmprunteurItemReader;
+import com.library.LibraryBatch.reader.EmprunteurLateItemReader;
+import com.library.LibraryBatch.reader.EmprunteurNotifyItemReader;
+import com.library.LibraryBatch.reader.EmprunteurWarnItemReader;
 import com.library.LibraryBatch.writer.EmprunteurItemWriter;
 
 @Configuration
@@ -33,17 +37,44 @@ public class BatchConfig {
 	public EmprunteurProxy emprunteurProxy;
 
 	@Bean
-	ItemReader<EmprunteurBean> read() {
-		EmprunteurItemReader eir = new EmprunteurItemReader();
+	ItemReader<EmprunteurBean> readLate() {
+		EmprunteurLateItemReader eir = new EmprunteurLateItemReader();
+		ItemReader<EmprunteurBean> inputR = eir.read(emprunteurProxy);
+
+		return inputR;
+	}
+	
+	@Bean
+	ItemReader<EmprunteurBean> readNotify() {
+		EmprunteurNotifyItemReader eir = new EmprunteurNotifyItemReader();
+		ItemReader<EmprunteurBean> inputR = eir.read(emprunteurProxy);
+
+		return inputR;
+	}
+	
+	@Bean
+	ItemReader<EmprunteurBean> readWarn() {
+		EmprunteurWarnItemReader eir = new EmprunteurWarnItemReader();
 		ItemReader<EmprunteurBean> inputR = eir.read(emprunteurProxy);
 
 		return inputR;
 	}
 
 	@Bean
-	public EmprunteurItemProcessor processor() {
-		return new EmprunteurItemProcessor();
+	public EmprunteurLateItemProcessor processorLate() {
+		return new EmprunteurLateItemProcessor();
 	}
+	
+	@Bean
+	public EmprunteurNotifyItemProcessor processorNotify() {
+		return new EmprunteurNotifyItemProcessor();
+	}
+	
+	@Bean
+	public EmprunteurWarnItemProcessor processorWarn() {
+		return new EmprunteurWarnItemProcessor();
+	}
+
 
 	@Bean
 	public EmprunteurItemWriter write() {
@@ -52,14 +83,38 @@ public class BatchConfig {
 	}
 
 	@Bean
-	public Step step1() {
-		return stepBuilderFactory.get("step1").<EmprunteurBean, MimeMessage>chunk(10).reader(read())
-				.processor(processor()).writer(write()).build();
+	public Step getLateStep() {
+		return stepBuilderFactory.get("getLateStep").<EmprunteurBean, MimeMessage>chunk(10).reader(readLate())
+				.processor(processorLate()).writer(write()).build();
+	}
+	
+	@Bean
+	public Step getNotifyStep() {
+		return stepBuilderFactory.get("getNotifyStep").<EmprunteurBean, MimeMessage>chunk(10).reader(readNotify())
+				.processor(processorNotify()).writer(write()).build();
+	}
+	
+	@Bean
+	public Step getWarnStep() {
+		return stepBuilderFactory.get("getWarnStep").<EmprunteurBean, MimeMessage>chunk(10).reader(readWarn())
+				.processor(processorWarn()).writer(write()).build();
 	}
 
-	@Bean
-	public Job exportEmprunteurJob() {
-		return jobBuilderFactory.get("exportEmprunteurJob").incrementer(new RunIdIncrementer()).flow(step1()).end()
+	@Bean(name="jobLate")
+	public Job getLateJob() {
+		return jobBuilderFactory.get("getLateJob").incrementer(new RunIdIncrementer()).flow(getLateStep()).end()
+				.build();
+	}
+	
+	@Bean(name="jobNotify")
+	public Job getNotifyJob() {
+		return jobBuilderFactory.get("getNotifyJob").incrementer(new RunIdIncrementer()).flow(getNotifyStep()).end()
+				.build();
+	}
+	
+	@Bean(name="jobWarn")
+	public Job getWarnJob() {
+		return jobBuilderFactory.get("getWarnJob").incrementer(new RunIdIncrementer()).flow(getWarnStep()).end()
 				.build();
 	}
 

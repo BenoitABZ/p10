@@ -38,6 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		auth.inMemoryAuthentication().withUser("utilisateur").password(passwordEncoder.encode("mdp"))
 				.authorities("USER");
+
 	}
 
 	@Bean
@@ -58,7 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				 */
 				.antMatchers("/h2-console/**").permitAll().antMatchers("/Liste-emprunts").authenticated().anyRequest()
 				.authenticated().and().formLogin().loginProcessingUrl("/login")
-				.successHandler(new AuthentificationLoginSuccessHandler())
+			.successHandler(new AuthentificationLoginSuccessHandler())
 				.failureHandler(new SimpleUrlAuthenticationFailureHandler()).permitAll().and().logout()
 				.logoutUrl("/logout").logoutSuccessHandler(new AuthentificationLogoutSuccessHandler())
 				.invalidateHttpSession(true).permitAll();
@@ -82,5 +83,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 			response.setStatus(HttpServletResponse.SC_OK);
 		}
 	}
-
 }

@@ -3,7 +3,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Liste des emprunts</title>
+<title>Liste des reservations</title>
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <link rel="stylesheet"
@@ -18,60 +18,56 @@
 
 	<div th:replace="~{fragments/Nav :: nav}"></div>
 
-	<div th:if="${emprunts.isEmpty()}">
+	<div th:if="${reservations.isEmpty()}">
 		<div class="row">
 			<H3
 				style="margin-left: 150px; margin-bottom: 300px; margin-top: 40px;">Vous
-				n'avez aucun emprunt!</H3>
+				n'avez aucune reservation en cours!</H3>
 		</div>
 	</div>
 
-	<div th:each="emprunt : ${emprunts}">
+	<div th:each="reservation: ${reservations}">
 		<div class="card col-md-4 mx-auto mt-4 text-center"
 			style="background-color: #F0E0B5; margin: 13px">
 
 			<div class="row">
 
 				<h1 style="padding: 15px; text-align: center"
-					th:text="${emprunt.exemplaire.ouvrage.titre}"></h1>
-				<img th:src="${emprunt.exemplaire.ouvrage.image}"
-					class="card-img-top" src="" alt="" />
+					th:text="${reservation.ouvrageDto.titre}"></h1>
+				<img th:src="${reservation.ouvrageDto.image}" class="card-img-top"
+					src="" alt="" />
 				<div class="card-body">
-					<h4 class="card-title">Dates</h4>
+					<h4 class="card-title">Informations reservation</h4>
 					<ul class="text-left" style="margin: 13px">
-						<li th:text="|Date d'emprunt : ${emprunt.dateEmprunt}|"></li>
-						<li th:text="|Date retour: ${emprunt.dateRetour}|"></li>
+						<li
+							th:text="|Position dans la file d'attente : ${reservation.positionListe}|"></li>
+						<li
+							th:text="|Date retour la plus proche: ${reservation.ouvrageDto.closerDate}|"></li>
 					</ul>
-					
-					<div th:if="${emprunt.prolongation}">
-						<p style="color: red">Votre emprunt ne peut plus être prolongé</p>
-					</div>
-					<div th:unless="${emprunt.prolongation}">
-						<a href="#myModal" role="button" class="btn btn-success"
-							data-toggle="modal">Prolonger</a>
-						<div id="myModal" class="modal fade" tabindex="-1" role="dialog"
-							aria-labelledby="myModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h3 id="myModalLabel">Prolongation</h3>
-										<button type="button" class="close" data-dismiss="modal"
-											aria-hidden="true">×</button>
-									</div>
-									<div class="modal-body">
-										<p>Vous pourrez conserver cet exemplaire 4 semaines
-											supplementaires</p>
-									</div>
-									<div class="modal-footer">
-										<a th:href="@{|/Liste-emprunts/prolonger/${emprunt.id}|}">Prolonger</a>
-									</div>
+
+					<a href="#myModal" role="button" class="btn btn-danger"
+						data-toggle="modal">Annuler</a>
+					<div id="myModal" class="modal fade" tabindex="-1" role="dialog"
+						aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h3 id="myModalLabel">Annulation</h3>
+									<button type="button" class="close" data-dismiss="modal"
+										aria-hidden="true">×</button>
+								</div>
+								<div class="modal-body">
+									<p>Votre reservation sera annuler et vous perdrez votre
+										position dans la file d'attente</p>
+								</div>
+								<div class="modal-footer">
+									<a th:href="@{|/Reservations/supprimer/${reservation.id}|}">Annuler</a>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			
 		</div>
 	</div>
 

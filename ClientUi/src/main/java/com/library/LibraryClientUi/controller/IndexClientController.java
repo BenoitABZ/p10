@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.library.LibraryClientUi.beans.EmprunteurAuth;
+import com.library.LibraryClientUi.dto.EmprunteurDto;
 
 @Controller
 public class IndexClientController {
@@ -12,11 +12,11 @@ public class IndexClientController {
 	@RequestMapping("/")
 	public String accueil(Model model) {
 
-		EmprunteurAuth emprunteurAuth = new EmprunteurAuth();
+		EmprunteurDto emprunteurDto = new EmprunteurDto();
 
-		emprunteurAuth.setPrenom("");
+		emprunteurDto.setPrenom("");
 
-		model.addAttribute(emprunteurAuth);
+		model.addAttribute(emprunteurDto);
 
 		return "Index";
 	}

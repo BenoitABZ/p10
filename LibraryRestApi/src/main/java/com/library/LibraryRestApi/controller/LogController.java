@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.library.LibraryRestApi.dao.EmprunteurDao;
+import com.library.LibraryRestApi.dto.EmprunteurDto;
 import com.library.LibraryRestApi.model.Emprunteur;
-import com.library.LibraryRestApi.model.EmprunteurAuth;
 
 @RestController
 public class LogController {
@@ -31,15 +31,16 @@ public class LogController {
 	EmprunteurDao emprunteurDao;
 
 	@PostMapping(value = "/Connexion")
-	public EmprunteurAuth login(HttpServletRequest req, @RequestBody EmprunteurAuth emprunteurAuth) {
+	public EmprunteurDto login(HttpServletRequest req, @RequestBody EmprunteurDto emprunteurDto) {
 
 		String user;
 		String pass;
 
 		try {
 
-			user = emprunteurAuth.getIdentifiant();
-			pass = emprunteurAuth.getMotDePasse();
+			user = emprunteurDto.getIdentifiant();
+
+			pass = emprunteurDto.getMotDePasse();
 
 			UsernamePasswordAuthenticationToken authReq = new UsernamePasswordAuthenticationToken(user, pass);
 
@@ -57,41 +58,41 @@ public class LogController {
 
 			String status = e1.getMessage();
 
-			emprunteurAuth.setStatus(status);
+			emprunteurDto.setStatus(status);
 
-			return emprunteurAuth;
+			return emprunteurDto;
 
 		} catch (UsernameNotFoundException e2) {
 
 			String status = e2.getMessage();
 
-			emprunteurAuth.setStatus(status);
+			emprunteurDto.setStatus(status);
 
-			return emprunteurAuth;
+			return emprunteurDto;
 
 		} catch (Exception e3) {
 
 			String status = "erreur interne, réessayer dans quelques instants";
 
-			emprunteurAuth.setStatus(status);
+			emprunteurDto.setStatus(status);
 
-			return emprunteurAuth;
+			return emprunteurDto;
 
 		}
 
 		Emprunteur emprunteur = emprunteurDao.findByIdentifiant(user).get();
 
-		emprunteurAuth.setNom(emprunteur.getNom());
+		emprunteurDto.setNom(emprunteur.getNom());
 
-		emprunteurAuth.setPrenom(emprunteur.getPrenom());
+		emprunteurDto.setPrenom(emprunteur.getPrenom());
 
-		emprunteurAuth.setId(emprunteur.getId());
+		emprunteurDto.setId(emprunteur.getId());
 
 		String status = "succes";
 
-		emprunteurAuth.setStatus(status);
+		emprunteurDto.setStatus(status);
 
-		return emprunteurAuth;
+		return emprunteurDto;
 	}
 
 	@GetMapping(value = "/Deconnexion")

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.library.LibraryClientUi.beans.EmprunteurAuth;
+import com.library.LibraryClientUi.dto.EmprunteurDto;
 import com.library.LibraryClientUi.proxies.LogProxy;
 
 @Controller
@@ -24,7 +24,7 @@ public class LogClientController {
 	@PostMapping(path = "/Connexion", consumes = { MediaType.APPLICATION_FORM_URLENCODED_VALUE })
 	public String connecter(Model model, @RequestParam MultiValueMap<String, String> params, HttpServletRequest req) {
 
-		EmprunteurAuth emprunteurAuthParam = new EmprunteurAuth();
+		EmprunteurDto emprunteurAuthParam = new EmprunteurDto();
 
 		String identifiant = params.getFirst("identifiant");
 
@@ -34,15 +34,15 @@ public class LogClientController {
 
 		emprunteurAuthParam.setMotDePasse(password);
 
-		EmprunteurAuth emprunteurAuth = logProxy.login(emprunteurAuthParam);
+		EmprunteurDto emprunteurDto = logProxy.login(emprunteurAuthParam);
 
-		model.addAttribute(emprunteurAuth);
+		model.addAttribute(emprunteurDto);
 
-		if (emprunteurAuth.getStatus().equals("succes")) {
+		if (emprunteurDto.getStatus().equals("succes")) {
 
 			HttpSession session = req.getSession();
 
-			session.setAttribute("emprunteur", emprunteurAuth);
+			session.setAttribute("emprunteur", emprunteurDto);
 
 			return "Index";
 		}

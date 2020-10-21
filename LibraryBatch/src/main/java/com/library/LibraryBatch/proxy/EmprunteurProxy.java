@@ -13,4 +13,10 @@ public interface EmprunteurProxy {
 	@GetMapping(value = "/Emprunteurs/retardataires")
 	public List<EmprunteurBean> getEmprunteursRetardataires();
 
+	@GetMapping(value = "/Emprunteurs/notifyEmprunteur")
+	public List<EmprunteurBean> notifyEmprunteur();
+
+	@GetMapping(value = "/Emprunteurs/checkIfBorrowed")
+	public List<EmprunteurBean> checkIfBorrowed();
+
 }

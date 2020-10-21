@@ -15,9 +15,15 @@ public class EmprunteurItemWriter implements ItemWriter<MimeMessage> {
 
 	@Override
 	public void write(List<? extends MimeMessage> messages) throws Exception {
+		
+		if (!messages.isEmpty()) {
 
 		messages.stream().forEach((message) -> mailSender.send(message));
-
+		
+		}
 	}
-
 }
+
+//mailSender.send(message)
+
+//System.out.println(message)

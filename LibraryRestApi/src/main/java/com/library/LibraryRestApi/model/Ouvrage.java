@@ -1,6 +1,7 @@
 package com.library.LibraryRestApi.model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -50,6 +51,9 @@ public class Ouvrage implements Serializable {
 
 	@OneToMany(mappedBy = "ouvrage", cascade = CascadeType.ALL)
 	private Set<Exemplaire> exemplaires;
+
+	@OneToMany(mappedBy = "ouvrage", cascade = CascadeType.ALL)
+	private List<Reservation> reservations;
 
 	public Integer getId() {
 		return id;
@@ -121,6 +125,18 @@ public class Ouvrage implements Serializable {
 
 	public void setExemplaires(Set<Exemplaire> exemplaires) {
 		this.exemplaires = exemplaires;
+	}
+
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

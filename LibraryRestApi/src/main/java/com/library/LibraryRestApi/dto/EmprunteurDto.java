@@ -1,26 +1,18 @@
-package com.library.LibraryClientUi.beans;
+package com.library.LibraryRestApi.dto;
 
-public class EmprunteurAuth {
+public class EmprunteurDto {
 
-	public int id;
+	private int id;
 
-	public String identifiant;
+	private String identifiant;
 
-	public String motDePasse;
+	private String motDePasse;
 
-	public String status;
+	private String status;
 
-	public String nom;
+	private String nom;
 
-	public String prenom;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
+	private String prenom;
 
 	public String getIdentifiant() {
 		return identifiant;
@@ -60,6 +52,14 @@ public class EmprunteurAuth {
 
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 }

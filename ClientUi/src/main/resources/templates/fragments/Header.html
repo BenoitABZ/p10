@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
 <meta charset="UTF-8">
 <title>Header</title>
-
 <link rel="stylesheet"
 	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <link rel="stylesheet"
 	href="http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
 </head>
 
-
 <body>
-
 
 	<header th:fragment="header">
 
@@ -38,8 +35,6 @@
 		</div>
 		<div class="row"
 			style="background-color: white; background-image: url('https://www.bnifrance.net/images/stucture/table_bni.jpg')">
-
-
 			<div class="col-xs-6 col-md-8" style="margin-top: 20px"></div>
 			<div class="col-xs-6 col-md-4">
 				<div class="card text-white bg-dark"
@@ -47,8 +42,6 @@
 					<div class="card-body">
 						<h3 class="card-title">Recherchez un ouvrage!</h3>
 						<p class="card-text">Recherche par mot clé (titre, auteur...)</p>
-
-
 
 						<form class="mx-2 my-auto d-inline w-100"
 							th:action="@{/Search/Ouvrages}" method="post" action="">
@@ -64,12 +57,10 @@
 							</div>
 						</form>
 
-
 					</div>
 				</div>
 			</div>
 		</div>
-
 
 		<script
 			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 <meta charset="UTF-8">
 <title>Liste des ouvrages</title>
@@ -18,7 +19,6 @@
 	<div th:replace="~{fragments/Nav :: nav}"></div>
 
 	<div th:if="${ouvrages.isEmpty()}">
-
 		<div class="row">
 			<H3
 				style="margin-left: 150px; margin-bottom: 300px; margin-top: 40px;">Aucun
@@ -29,7 +29,9 @@
 	<div th:each="ouvrage : ${ouvrages}">
 		<div class="card col-md-4 mx-auto mt-4 text-center"
 			style="background-color: #F0E0B5; margin: 13px">
+
 			<div class="row">
+
 				<h1 style="padding: 15px; text-align: center"
 					th:text="${ouvrage.titre}"></h1>
 				<img th:src="${ouvrage.image}" class="card-img-top" src="" alt="" />
@@ -44,7 +46,8 @@
 					<div th:if="${ouvrage.disponibilite}">
 						<button class="btn btn-large btn-success" type="button"
 							data-toggle="collapse" data-target="#collapseExample1"
-							aria-expanded="false" aria-controls="collapseExample1">Disponible</button>
+							aria-expanded="false" aria-controls="collapseExample1">
+							Disponible</button>
 						<div class="collapse" id="collapseExample1">
 							<div class="card card-body"
 								th:text="|Cet ouvrage est disponible en ${ouvrage.nombreExemplaires} exemplaire(s)|"></div>
@@ -57,10 +60,36 @@
 							Indisponible</button>
 						<div class="collapse" id="collapseExample1">
 							<div class="card card-body"
-								th:text="|Cet ouvrage est indisponible|"></div>
+								th:text="|Cet ouvrage est indisponible - Date de retour: ${ouvrage.closerDate} - Nombre de reservations: ${ouvrage.nombreReservations}|"></div>
+						</div>
+						<a href="#myModal" role="button" class="btn btn-warning"
+							data-toggle="modal">Reserver</a>
+						<div id="myModal" class="modal fade" tabindex="-1" role="dialog"
+							aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h3 id="myModalLabel">Reservation</h3>
+										<button type="button" class="close" data-dismiss="modal"
+											aria-hidden="true">×</button>
+									</div>
+									<div th:if="${ouvrage.reservationDto.autorisation}">
+									    <div class="modal-body"									     
+											th:text="|${ouvrage.reservationDto.message}|"></div>
+									    <div class="modal-footer">
+										  <a th:href="@{|/Reservations/${ouvrage.id}|}">Reserver</a>
+									    </div>
+									</div>
+										<div th:unless="${ouvrage.reservationDto.autorisation}">
+									    <div class="modal-body"									     
+											th:text="|${ouvrage.reservationDto.message}|"></div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 	</div>
