@@ -43,7 +43,7 @@ public class Emprunt implements Serializable {
 	@JoinColumn(name = "id_exemplaire")
 	private Exemplaire exemplaire;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
 	@JoinColumn(name = "id_emprunteur")
 	private Emprunteur emprunteur;
 
