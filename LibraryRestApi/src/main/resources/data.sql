@@ -1,3 +1,4 @@
+/*
 INSERT INTO BIBLIOTHEQUE (id_bibliotheque, code_postal, libelle_voie, nom_voie, numero_voie, ville, nom, telephone, mail, image) VALUES (1, '31000', 'Rue', 'Jean Jaures', '1', 'Toulouse', 'Bibliothèque municipale principale', '0552636547', 'bumup@ville.com','https://www.iphonote.com/wp-content/uploads/2019/05/apple-store-carnegie-washington_2.jpg');
 INSERT INTO BIBLIOTHEQUE (id_bibliotheque, code_postal, libelle_voie, nom_voie, numero_voie, ville, nom, telephone, mail, image) VALUES (2, '31450', 'Rue', 'Perigord', '2', 'Toulouse', 'Mediathèque AM', '0541236585', 'mediathequeam@ville.com','https://www.aiguillon-construction.fr/wp-content/uploads/2017/09/Pho-AC-ECL-1-600x398.jpg');
 
@@ -21,6 +22,6 @@ INSERT INTO RESERVATION(id_reservation, date_reservation, date_notification, not
 INSERT INTO RESERVATION(id_reservation, date_reservation, date_notification, notification, id_emprunteur, id_ouvrage) VALUES (2, '2020-10-19', null, false, 3, 1);
 INSERT INTO RESERVATION(id_reservation, date_reservation, date_notification, notification, id_emprunteur, id_ouvrage) VALUES (3, '2020-10-20', null, false, 4, 1);
 INSERT INTO RESERVATION(id_reservation, date_reservation, date_notification, notification, id_emprunteur, id_ouvrage) VALUES (4, '2020-10-21', null, false, 5, 1);
-
+*/
 
 

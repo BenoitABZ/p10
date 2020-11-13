@@ -144,6 +144,47 @@ public class ReservationController {
 
 		Emprunteur emprunteur = emprunteurDao.findById(reservationDto.getEmprunteurDto().getId()).get();
 
+		try {
+
+			if (ouvrage.getDisponibilite() == true) {
+
+				reservationDto.setAutorisation(false);
+
+				reservationDto.setMessage("Cet ouvrage est disponible, inutile de le reserver");
+
+				return reservationDto;
+
+			}
+
+			if (ouvrage.getReservations().size() >= 2 * ouvrage.getExemplaires().size()) {
+
+				reservationDto.setAutorisation(false);
+
+				reservationDto.setMessage("La liste de réservation ne peut comporter qu’un maximum de personnes correspondant à 2x le nombre d’exemplaires de l’ouvrage");
+
+				return reservationDto;
+
+			}
+			
+			List<Reservation> reservations = emprunteur.getReservations();
+			
+			for (Reservation reservation : reservations) {
+
+				if (reservation.getOuvrage().getTitre().equals(reservationDto.getOuvrageDto().getTitre())) {
+
+					reservationDto.setAutorisation(false);
+
+					reservationDto.setMessage("Vous ne pouvez reserver plus de 2x le meme ouvrage");
+
+					return reservationDto;
+
+				}
+			}
+
+		} catch (NullPointerException npe) {
+			npe.printStackTrace();
+		}
+
 		Set<Emprunt> emprunts = emprunteur.getEmprunts();
 
 		for (Emprunt emprunt : emprunts) {
@@ -158,41 +199,6 @@ public class ReservationController {
 			}
 		}
 
-		if (ouvrage.getDisponibilite() == true) {
-
-			reservationDto.setAutorisation(false);
-
-			reservationDto.setMessage("Cet ouvrage est disponible, inutile de le reserver");
-
-			return reservationDto;
-
-		}
-
-		if (ouvrage.getReservations().size() >= 2 * ouvrage.getExemplaires().size()) {
-
-			reservationDto.setAutorisation(false);
-
-			reservationDto.setMessage("La liste de réservation ne peut comporter qu’un maximum de personnes correspondant à 2x le nombre d’exemplaires de l’ouvrage");
-
-			return reservationDto;
-
-		}
-		
-		Set<Reservation> reservations = emprunteur.getReservations();
-		
-		for (Reservation reservation : reservations) {
-			
-			if (reservation.getOuvrage().getTitre().equals(reservationDto.getOuvrageDto().getTitre())) {
-				
-				reservationDto.setAutorisation(false);
-				
-				reservationDto.setMessage( "Vous ne pouvez reserver plus de 2x le meme ouvrage");
-				
-				return reservationDto;
-				
-			}
-		}
-		
 		reservationDto.setAutorisation(true);
 
 		reservationDto.setDateReservation(LocalDate.now());

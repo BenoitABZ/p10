@@ -13,18 +13,20 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
+@Table(name="reservation")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Reservation.class)
 public class Reservation implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "identifier", sequenceName = "reservation_reservation_id_seq", allocationSize = 1)
+	@SequenceGenerator(name = "identifier", sequenceName = "reservation_id_reservation_seq", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "identifier")
 	@Column(name = "id_reservation")
 	private Integer id;

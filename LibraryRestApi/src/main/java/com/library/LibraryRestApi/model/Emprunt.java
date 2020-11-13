@@ -14,18 +14,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
+@Table(name="emprunt")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Emprunt.class)
 public class Emprunt implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "identifier", sequenceName = "emprunt_emprunt_id_seq", allocationSize = 1)
+	@SequenceGenerator(name = "identifier", sequenceName = "emprunt_id_emprunt_seq", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "identifier")
 	@Column(name = "id_emprunt")
 	private Integer id;
@@ -39,11 +41,11 @@ public class Emprunt implements Serializable {
 	@Column(name = "prolongation")
 	private Boolean prolongation;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.MERGE })
 	@JoinColumn(name = "id_exemplaire")
 	private Exemplaire exemplaire;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH, CascadeType.MERGE})
 	@JoinColumn(name = "id_emprunteur")
 	private Emprunteur emprunteur;
 

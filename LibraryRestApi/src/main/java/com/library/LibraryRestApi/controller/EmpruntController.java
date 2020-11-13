@@ -1,6 +1,7 @@
 package com.library.LibraryRestApi.controller;
 
 import java.time.LocalDate;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -121,17 +122,29 @@ public class EmpruntController {
 				}
 			}
 
-			if (exemplairesBuff.size() == 1)
+			if (exemplairesBuff.size() == 1) {
 
 				ouvrage.setDisponibilite(false);
 
-			Set<Reservation> reservations = emprunteur.getReservations();
+			}
+
+			List<Reservation> reservations = emprunteur.getReservations();
+
+			System.out.println(reservations.get(0).getOuvrage().getTitre());
+
+			System.out.println(ouvrage.getTitre());
 
 			for (Reservation reservation : reservations) {
+
+				System.out.println(reservation.getOuvrage().getTitre().equals(ouvrage.getTitre()));
 
 				if (reservation.getOuvrage().getTitre().equals(ouvrage.getTitre())) {
 
 					reservationDao.delete(reservation);
+
+					reservations.remove(reservation);
+
+					emprunteur.setReservations(reservations);
 
 					break;
 
@@ -163,11 +176,38 @@ public class EmpruntController {
 
 		Emprunt emprunt = exemplaire.getEmprunt();
 
-		empruntDao.delete(emprunt);
+		Emprunteur emprunteur = emprunt.getEmprunteur();
 
 		Ouvrage ouvrage = exemplaire.getOuvrage();
 
+		empruntDao.delete(emprunt);
+
+		Set<Emprunt> emprunts = emprunteur.getEmprunts();
+
+		if (emprunts.contains(emprunt)) {
+
+			emprunts.remove(emprunt);
+
+			emprunteur.setEmprunts(emprunts);
+
+			emprunteurDao.save(emprunteur);
+
+		}
+
+		Set<Exemplaire> exemplaires = ouvrage.getExemplaires();
+
+		if (exemplaires.contains(exemplaire)) {
+
+			exemplaires.remove(exemplaire);
+
+			exemplaire.setEmprunt(null);
+
+			exemplaires.add(exemplaire);
+		}
+
 		ouvrage.setDisponibilite(true);
+
+		ouvrage.setExemplaires(exemplaires);
 
 		ouvrageDao.save(ouvrage);
 
@@ -180,17 +220,13 @@ public class EmpruntController {
 
 		LocalDate dateRetour = emprunt.getDateRetour();
 
-		if (emprunt.getProlongation() == false) {
+		LocalDate dateProlongation = dateRetour.plusDays(28);
 
-			LocalDate dateProlongation = dateRetour.plusDays(28);
+		emprunt.setDateRetour(dateProlongation);
 
-			emprunt.setDateRetour(dateProlongation);
+		emprunt.setProlongation(true);
 
-			emprunt.setProlongation(true);
-
-			empruntDao.save(emprunt);
-
-		}
+		empruntDao.save(emprunt);
 
 	}
 

@@ -18,5 +18,5 @@ public interface EmpruntDao extends JpaRepository<Emprunt, Integer> {
 	@Query("SELECT em " + "FROM Emprunt em " + "WHERE current_date > em.dateRetour")
 
 	List<Emprunt> findLateEmprunt();
-	
+
 }

@@ -14,4 +14,6 @@ public interface ExemplaireDao extends JpaRepository<Exemplaire, Integer> {
 
 	List<Exemplaire> findAll();
 
+	Exemplaire findByEditeur(String editeur);
+
 }
