@@ -56,7 +56,7 @@ public class BatchScheduler {
 	
 	 //fixedRate = 70000
 	
-	@Scheduled(fixedRate = 70000 )  
+	@Scheduled(cron="0 0 9-17 * * MON-FRI")  
 	public void scheduleNotify() throws JobParametersInvalidException, JobExecutionAlreadyRunningException,
 			JobRestartException, JobInstanceAlreadyCompleteException {
 		Date date = new Date();
@@ -76,7 +76,7 @@ public class BatchScheduler {
 
     //fixedRate = 65000
 	
-	@Scheduled(fixedRate = 65000)  
+	@Scheduled(cron="0 0 1 * * MON-FRI")  
 	public void scheduleWarn() throws JobParametersInvalidException, JobExecutionAlreadyRunningException,
 			JobRestartException, JobInstanceAlreadyCompleteException {
 		Date date = new Date();

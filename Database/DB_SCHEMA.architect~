@@ -239,30 +239,30 @@
    </folder>
   </table>
   <relationships>
-   <relationship id="REL67" populated="true" UUID="fd003144-0613-4734-ac1a-66442ec0f20e" deferrability="7" deleteRule="3" fk-table-ref="TAB38" fkCardinality="7" identifying="false" name="Emprunteur_Emprunt_fk" physicalName="emprunteur_emprunt_fk" pk-table-ref="TAB1" pkCardinality="2" updateRule="3" >
+   <relationship id="REL67" populated="true" UUID="fd003144-0613-4734-ac1a-66442ec0f20e" deferrability="7" deleteRule="3" fk-table-ref="TAB38" fkCardinality="7" identifying="false" name="Emprunteur_Emprunt_fk" physicalName="Emprunteur_Emprunt_fk" pk-table-ref="TAB1" pkCardinality="2" updateRule="3" >
     <column-mapping id="CMP68" populated="true" UUID="56459ad2-caef-4b81-aca7-09eb8594e5a6" fk-column-ref="COL43" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL2" />
    </relationship>
-   <relationship id="REL69" populated="true" UUID="a1f0ff64-99d5-41f6-8d03-cdc90c22dabd" deferrability="7" deleteRule="3" fk-table-ref="TAB58" fkCardinality="7" identifying="false" name="Emprunteur_Reservation_fk" physicalName="emprunteur_reservation_fk" pk-table-ref="TAB1" pkCardinality="2" updateRule="3" >
+   <relationship id="REL69" populated="true" UUID="a1f0ff64-99d5-41f6-8d03-cdc90c22dabd" deferrability="7" deleteRule="3" fk-table-ref="TAB58" fkCardinality="7" identifying="false" name="Emprunteur_Reservation_fk" physicalName="Emprunteur_Reservation_fk" pk-table-ref="TAB1" pkCardinality="2" updateRule="3" >
     <column-mapping id="CMP70" populated="true" UUID="fc1a0e35-8645-4d08-bcab-71519a3e93ae" fk-column-ref="COL63" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL2" />
    </relationship>
-   <relationship id="REL71" populated="true" UUID="a76a03f1-7e53-4716-98ee-49a8385deffe" deferrability="7" deleteRule="3" fk-table-ref="TAB30" fkCardinality="6" identifying="false" name="Bibliotheque_Exemplaire_fk" physicalName="bibliotheque_exemplaire_fk" pk-table-ref="TAB17" pkCardinality="2" updateRule="3" >
+   <relationship id="REL71" populated="true" UUID="a76a03f1-7e53-4716-98ee-49a8385deffe" deferrability="7" deleteRule="3" fk-table-ref="TAB30" fkCardinality="6" identifying="false" name="Bibliotheque_Exemplaire_fk" physicalName="Bibliotheque_Exemplaire_fk" pk-table-ref="TAB17" pkCardinality="2" updateRule="3" >
     <column-mapping id="CMP72" populated="true" UUID="cdb18ea1-70f0-4adc-8a9b-3eb3c34e89c4" fk-column-ref="COL34" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL18" />
    </relationship>
-   <relationship id="REL73" populated="true" UUID="68c9f115-fd3c-4ef8-8f6d-ff7ec4ee3f8c" deferrability="7" deleteRule="3" fk-table-ref="TAB38" fkCardinality="3" identifying="false" name="Emprunt_Exemplaire_fk" physicalName="emprunt_exemplaire_fk" pk-table-ref="TAB30" pkCardinality="2" updateRule="3" >
+   <relationship id="REL73" populated="true" UUID="68c9f115-fd3c-4ef8-8f6d-ff7ec4ee3f8c" deferrability="7" deleteRule="3" fk-table-ref="TAB38" fkCardinality="3" identifying="false" name="Emprunt_Exemplaire_fk" physicalName="Emprunt_Exemplaire_fk" pk-table-ref="TAB30" pkCardinality="2" updateRule="3" >
     <column-mapping id="CMP74" populated="true" UUID="37c16790-1d7a-4296-a173-a670a36fee95" fk-column-ref="COL44" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL31" />
    </relationship>
-   <relationship id="REL75" populated="true" UUID="2522621b-e0d9-4df9-baf8-07af49f876df" deferrability="7" deleteRule="3" fk-table-ref="TAB30" fkCardinality="6" identifying="false" name="Ouvrage_Exemplaire_fk" physicalName="ouvrage_exemplaire_fk" pk-table-ref="TAB47" pkCardinality="2" updateRule="3" >
+   <relationship id="REL75" populated="true" UUID="2522621b-e0d9-4df9-baf8-07af49f876df" deferrability="7" deleteRule="3" fk-table-ref="TAB30" fkCardinality="6" identifying="false" name="Ouvrage_Exemplaire_fk" physicalName="Ouvrage_Exemplaire_fk" pk-table-ref="TAB47" pkCardinality="2" updateRule="3" >
     <column-mapping id="CMP76" populated="true" UUID="01281465-cdb7-4ef6-90fa-a70fa144fa09" fk-column-ref="COL35" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL48" />
    </relationship>
-   <relationship id="REL77" populated="true" UUID="96f13372-b8f6-4fa7-89ef-01c67d40c479" deferrability="7" deleteRule="3" fk-table-ref="TAB58" fkCardinality="7" identifying="false" name="Ouvrage_Reservation_fk" physicalName="ouvrage_reservation_fk" pk-table-ref="TAB47" pkCardinality="2" updateRule="3" >
+   <relationship id="REL77" populated="true" UUID="96f13372-b8f6-4fa7-89ef-01c67d40c479" deferrability="7" deleteRule="3" fk-table-ref="TAB58" fkCardinality="7" identifying="false" name="Ouvrage_Reservation_fk" physicalName="Ouvrage_Reservation_fk" pk-table-ref="TAB47" pkCardinality="2" updateRule="3" >
     <column-mapping id="CMP78" populated="true" UUID="f4659e5b-9802-42e2-b6fc-3c0d9cfbd05f" fk-column-ref="COL64" name="Column Mapping" physicalName="Column Mapping" pk-column-ref="COL48" />
    </relationship>
   </relationships>
  </target-database>
- <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="false" target-schema="public"> </ddl-generator>
+ <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="true" target-schema="public"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="" jobName="" schemaName="" kettleJoinType="0" savingToFile="true" />
- <play-pen zoom="1.0" viewportX="0" viewportY="0" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
+ <play-pen zoom="1.0" viewportX="0" viewportY="9" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
   <table-pane table-ref="TAB1" x="20" y="20" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB17" x="670" y="26" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB30" x="663" y="359" bgColor="0xeeeeee" fgColor="0x000000" rounded="false" dashed="false"/>
