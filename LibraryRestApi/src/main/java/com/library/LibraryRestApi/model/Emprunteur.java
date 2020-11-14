@@ -2,6 +2,7 @@ package com.library.LibraryRestApi.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,18 +14,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
+@Table(name="emprunteur")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = Emprunteur.class)
 public class Emprunteur implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name = "identifier", sequenceName = "emprunteur_emprunteur_id_seq", allocationSize = 1)
+	@SequenceGenerator(name = "identifier", sequenceName = "emprunteur_id_emprunteur_seq", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "identifier")
 	@Column(name = "id_emprunteur")
 	private Integer id;
@@ -57,7 +60,7 @@ public class Emprunteur implements Serializable {
 	private Set<Emprunt> emprunts;
 
 	@OneToMany(mappedBy = "emprunteur", cascade = CascadeType.ALL)
-	private Set<Reservation> reservations;
+	private List<Reservation> reservations;
 
 	public Integer getId() {
 		return id;
@@ -139,11 +142,11 @@ public class Emprunteur implements Serializable {
 		this.emprunts = emprunts;
 	}
 
-	public Set<Reservation> getReservations() {
+	public List<Reservation> getReservations() {
 		return reservations;
 	}
 
-	public void setReservations(Set<Reservation> reservations) {
+	public void setReservations(List<Reservation> reservations) {
 		this.reservations = reservations;
 	}
 

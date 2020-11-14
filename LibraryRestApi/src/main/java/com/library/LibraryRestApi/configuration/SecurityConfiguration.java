@@ -59,7 +59,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				 */
 				.antMatchers("/h2-console/**").permitAll().antMatchers("/Liste-emprunts").authenticated().anyRequest()
 				.authenticated().and().formLogin().loginProcessingUrl("/login")
-			.successHandler(new AuthentificationLoginSuccessHandler())
+				.successHandler(new AuthentificationLoginSuccessHandler())
 				.failureHandler(new SimpleUrlAuthenticationFailureHandler()).permitAll().and().logout()
 				.logoutUrl("/logout").logoutSuccessHandler(new AuthentificationLogoutSuccessHandler())
 				.invalidateHttpSession(true).permitAll();
